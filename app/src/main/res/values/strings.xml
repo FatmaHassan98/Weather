@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="title_home">Home</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="title_alerts">Alerts</string>
+    <string name="title_settings">Settings</string>
+    <string name="daily">Daily</string>
+    <string name="weather">Weather</string>
+    <string name="location">Location</string>
+    <string name="language">Language</string>
+    <string name="temperature">Temperature</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="notifications">Notifications</string>
+    <string name="gps">GPS</string>
+    <string name="map">Map</string>
+    <string name="arabic">Arabic</string>
+    <string name="english">English</string>
+    <string name="celsius">Celsius</string>
+    <string name="kelvin">Kelvin</string>
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="meter_sec">Meter / Sec</string>
+    <string name="mile_hour">Mile / Hour</string>
+    <string name="enable">Enable</string>
+    <string name="disable">Disable</string>
+    <string name="save">Save</string>
+    <string name="noAlerts">No Alerts</string>
+    <string name="today">Today</string>
+    <string name="pressure">Pressure</string>
+    <string name="humidity">Humidity</string>
+    <string name="cloud">Cloud</string>
+    <string name="sunRise">Sun Rise</string>
+    <string name="visibility">Visibility</string>
+    <string name="theme">Theme</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="day">Day</string>
+</resources>
