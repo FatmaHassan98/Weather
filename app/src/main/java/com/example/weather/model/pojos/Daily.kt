@@ -1,6 +1,6 @@
-package com.example.weather.model
+package com.example.weather.model.pojos
 
-data class Daily (var clouds: Int, var dew_point: Double, var dt: Int,
+data class Daily (var clouds: Int, var dew_point: Double, var dt: Long,
                   var feels_like: FeelsLike, var humidity: Int, var moon_phase: Double,
                   var moonrise: Int, var moonset: Int, var pop: Double,
                   var pressure: Int, var rain: Double, var snow: Double,
