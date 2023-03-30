@@ -38,8 +38,8 @@ class DayAdapter (private val context: Context) : ListAdapter<Daily, DayAdapter.
         holder.binding.textDescriptionDay.text = getItem(position).weather[0].description
 
         Glide.with(context)
-        .load("https://openweathermap.org/img/wn/"
-                + getItem(position).weather[0].icon+ "@2x.png")
+        .load(
+            getItem(position).weather[0].icon)
         .apply( RequestOptions().override(holder.binding.imageDay.width,holder.binding.imageDay.height))
         .into(holder.binding.imageDay)
 

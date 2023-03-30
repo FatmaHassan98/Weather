@@ -1,20 +1,23 @@
 package com.example.weather.model.repository
 
+import com.example.weather.database.room.LocalSource
+import com.example.weather.database.room.entity.EntityHome
 import com.example.weather.model.pojos.WeatherResponse
 import com.example.weather.network.RemoteSource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 
-class Repository private constructor(var remoteSource: RemoteSource) : RepositoryInterface{
+class Repository private constructor(var remoteSource: RemoteSource,
+                                     var localSource: LocalSource)
+    : RepositoryInterface{
 
     companion object{
 
         private var instance : Repository? = null
 
-        fun getInstance( remoteSource: RemoteSource): Repository {
+        fun getInstance( remoteSource: RemoteSource,localSource: LocalSource): Repository {
             return instance?: synchronized(this){
-                val _instance = Repository(remoteSource)
+                val _instance = Repository(remoteSource,localSource)
                 instance = _instance
 
                 _instance
@@ -26,4 +29,11 @@ class Repository private constructor(var remoteSource: RemoteSource) : Repositor
 
         return flowOf( remoteSource.getWeather(lat,lon,units,lang) )
     }
+
+    override val getHomeWeather: Flow<EntityHome> = localSource.getHomeWeather
+
+    override suspend fun insertHomeWeather(entityHome: EntityHome) {
+        localSource.insertHomeWeather(entityHome)
+    }
+
 }
