@@ -81,11 +81,13 @@
 
 
                 <RadioGroup
+                    android:id="@+id/locationGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="150dp">
 
                     <RadioButton
+                        android:id="@+id/gpsLocation"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/gps"
@@ -93,6 +95,7 @@
                         android:textSize="15sp" />
 
                     <RadioButton
+                        android:id="@+id/mapLocation"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/map"
@@ -135,11 +138,13 @@
 
 
                 <RadioGroup
+                    android:id="@+id/languageGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="150dp">
 
                     <RadioButton
+                        android:id="@+id/arabicLanguage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/arabic"
@@ -147,6 +152,7 @@
                         android:textSize="15sp" />
 
                     <RadioButton
+                        android:id="@+id/englishLanguage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/english"
@@ -189,11 +195,13 @@
 
 
                 <RadioGroup
+                    android:id="@+id/temperatureGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="150dp">
 
                     <RadioButton
+                        android:id="@+id/celsiusTemperature"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/celsius"
@@ -201,6 +209,7 @@
                         android:textSize="15sp" />
 
                     <RadioButton
+                        android:id="@+id/kelvinTemperature"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/kelvin"
@@ -208,6 +217,7 @@
                         android:textSize="15sp" />
 
                     <RadioButton
+                        android:id="@+id/fahrenheitTemperature"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/fahrenheit"
@@ -250,11 +260,13 @@
 
 
                 <RadioGroup
+                    android:id="@+id/windGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="150dp">
 
                     <RadioButton
+                        android:id="@+id/meterWind"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/meter_sec"
@@ -262,6 +274,7 @@
                         android:textSize="15sp" />
 
                     <RadioButton
+                        android:id="@+id/mileWind"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/mile_hour"
@@ -304,11 +317,13 @@
 
 
                 <RadioGroup
+                    android:id="@+id/notificationGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="150dp">
 
                     <RadioButton
+                        android:id="@+id/enableNotification"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/enable"
@@ -316,6 +331,7 @@
                         android:textSize="15sp" />
 
                     <RadioButton
+                        android:id="@+id/disableNotification"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/disable"
@@ -358,11 +374,13 @@
 
 
                 <RadioGroup
+                    android:id="@+id/themeGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="150dp">
 
                     <RadioButton
+                        android:id="@+id/lightTheme"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/light"
@@ -370,6 +388,7 @@
                         android:textSize="15sp" />
 
                     <RadioButton
+                        android:id="@+id/darkTheme"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/dark"
