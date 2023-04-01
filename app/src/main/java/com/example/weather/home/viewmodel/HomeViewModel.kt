@@ -27,11 +27,10 @@ class HomeViewModel (private val repositoryInterface: RepositoryInterface,
     val room = MutableStateFlow<RoomStatus>(RoomStatus.Loading)
 
     init {
-        getLocation()
         getHomeWeather()
     }
 
-     private fun getWeather(lat: Double, lon: Double, units: String, lang:String) {
+    fun getWeather(lat: Double, lon: Double, units: String, lang:String) {
         viewModelScope.launch{
             repositoryInterface.getWeather(lat,lon,units,lang).catch {
                     e-> weather.value = APIState.Failure(e)
@@ -40,14 +39,15 @@ class HomeViewModel (private val repositoryInterface: RepositoryInterface,
             }
         }
     }
-    private fun getLocation(){
+    fun getLocation(){
         viewModelScope.launch{
             gpsLocation.location.collectLatest {
                 when(it){
                     is LocationStatus.Success -> {
-                        getWeather(it.location.latitude , it.location.longitude,
-                            sharedPreferenceSource.getSavedTemperatureUnit(),
-                            sharedPreferenceSource.getSavedLanguage())
+                        sharedPreferenceSource.setLatAndLonHome(
+                            it.location.latitude,
+                            it.location.longitude
+                        )
                     }
                     is LocationStatus.Failure ->{
 
@@ -56,7 +56,6 @@ class HomeViewModel (private val repositoryInterface: RepositoryInterface,
                     }
                 }
             }
-
         }
     }
 

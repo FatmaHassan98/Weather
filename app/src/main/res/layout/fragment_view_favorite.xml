@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/main_color"
-    tools:context=".home.view.HomeFragment">
+    tools:context=".favorite.view.ViewFavoriteFragment">
 
     <TextView
-        android:id="@+id/dateText"
+        android:id="@+id/dateTextFavorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +19,7 @@
         android:layout_marginStart="20dp" />
 
     <TextView
-        android:id="@+id/hour"
+        android:id="@+id/hourFavorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,14 +29,14 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/locationText"
+        android:id="@+id/locationTextFavorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="10dp"
         android:textColor="@color/secondary_color"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@id/dateText"
+        app:layout_constraintTop_toBottomOf="@id/dateTextFavorite"
         android:layout_marginStart="20dp" />
 
     <ScrollView
@@ -46,14 +46,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/locationText">
+        app:layout_constraintTop_toBottomOf="@id/locationTextFavorite">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/image"
+                android:id="@+id/imageFavorite"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -61,44 +61,44 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/description"
+                android:id="@+id/descriptionFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image" />
+                app:layout_constraintTop_toBottomOf="@+id/imageFavorite" />
 
             <TextView
-                android:id="@+id/status"
+                android:id="@+id/statusFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/description" />
+                app:layout_constraintTop_toBottomOf="@+id/descriptionFavorite" />
 
             <TextView
-                android:id="@+id/temperature"
+                android:id="@+id/temperatureFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/secondary_color"
                 android:textSize="40sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/status" />
+                app:layout_constraintTop_toBottomOf="@+id/statusFavorite" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardDetails"
+                android:id="@+id/cardDetailsFavorite"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/main_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/temperature">
+                app:layout_constraintTop_toBottomOf="@+id/temperatureFavorite">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -106,7 +106,7 @@
                     android:background="@drawable/cardview_background">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cardInformation"
+                        android:id="@+id/cardInformationFavorite"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
@@ -119,7 +119,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/cardPressure"
+                            android:id="@+id/cardPressureFavorite"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
@@ -129,7 +129,7 @@
                             android:padding="10dp">
 
                             <ImageView
-                                android:id="@+id/imagePressure"
+                                android:id="@+id/imagePressureFavorite"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center_horizontal"
@@ -137,7 +137,7 @@
                                 android:src="@drawable/pressure" />
 
                             <TextView
-                                android:id="@+id/textValuePressure"
+                                android:id="@+id/textValuePressureFavorite"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -146,7 +146,7 @@
                                 android:textColor="@color/white" />
 
                             <TextView
-                                android:id="@+id/textPressure"
+                                android:id="@+id/textPressureFavorite"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -156,7 +156,7 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/cardHumidity"
+                            android:id="@+id/cardHumidityFavorite"
                             android:layout_width="wrap_content"
                             app:cardElevation="0dp"
                             android:layout_height="wrap_content"
@@ -166,7 +166,7 @@
                             android:padding="10dp">
 
                             <ImageView
-                                android:id="@+id/imageHumidity"
+                                android:id="@+id/imageHumidityFavorite"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center_horizontal"
@@ -174,7 +174,7 @@
                                 android:src="@drawable/humidity" />
 
                             <TextView
-                                android:id="@+id/textValueHumidity"
+                                android:id="@+id/textValueHumidityFavorite"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -183,7 +183,7 @@
                                 android:textColor="@color/white" />
 
                             <TextView
-                                android:id="@+id/textHumidity"
+                                android:id="@+id/textHumidityFavorite"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -193,7 +193,7 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/cardCloud"
+                            android:id="@+id/cardCloudFavorite"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:cardElevation="0dp"
@@ -203,7 +203,7 @@
                             android:padding="10dp">
 
                             <ImageView
-                                android:id="@+id/imageCloud"
+                                android:id="@+id/imageCloudFavorite"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center_horizontal"
@@ -211,7 +211,7 @@
                                 android:src="@drawable/cloud" />
 
                             <TextView
-                                android:id="@+id/textValueCloud"
+                                android:id="@+id/textValueCloudFavorite"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -220,7 +220,7 @@
                                 android:textColor="@color/white" />
 
                             <TextView
-                                android:id="@+id/textCloud"
+                                android:id="@+id/textCloudFavorite"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -230,7 +230,7 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/cardSunRise"
+                            android:id="@+id/cardSunRiseFavorite"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="30dp"
@@ -241,7 +241,7 @@
                             android:padding="10dp">
 
                             <ImageView
-                                android:id="@+id/imageSunRise"
+                                android:id="@+id/imageSunRiseFavorite"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center_horizontal"
@@ -249,7 +249,7 @@
                                 android:src="@drawable/sun" />
 
                             <TextView
-                                android:id="@+id/textValueSunRise"
+                                android:id="@+id/textValueSunRiseFavorite"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -258,7 +258,7 @@
                                 android:textColor="@color/white" />
 
                             <TextView
-                                android:id="@+id/textSunRise"
+                                android:id="@+id/textSunRiseFavorite"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -268,7 +268,7 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/cardVisibility"
+                            android:id="@+id/cardVisibilityFavorite"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="150dp"
@@ -278,7 +278,7 @@
                             android:padding="10dp">
 
                             <ImageView
-                                android:id="@+id/imageVisibility"
+                                android:id="@+id/imageVisibilityFavorite"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center_horizontal"
@@ -286,7 +286,7 @@
                                 android:src="@drawable/visibility" />
 
                             <TextView
-                                android:id="@+id/textValueVisibility"
+                                android:id="@+id/textValueVisibilityFavorite"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -295,7 +295,7 @@
                                 android:textColor="@color/white" />
 
                             <TextView
-                                android:id="@+id/textVisibility"
+                                android:id="@+id/textVisibilityFavorite"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -305,7 +305,7 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/cardWindSpeed"
+                            android:id="@+id/cardWindSpeedFavorite"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="260dp"
@@ -315,7 +315,7 @@
                             android:padding="10dp">
 
                             <ImageView
-                                android:id="@+id/imageWindSpeed"
+                                android:id="@+id/imageWindSpeedFavorite"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="center_horizontal"
@@ -323,7 +323,7 @@
                                 android:src="@drawable/wind" />
 
                             <TextView
-                                android:id="@+id/textValueWindSpeed"
+                                android:id="@+id/textValueWindSpeedFavorite"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -332,7 +332,7 @@
                                 android:textColor="@color/white" />
 
                             <TextView
-                                android:id="@+id/textWindSpeed"
+                                android:id="@+id/textWindSpeedFavorite"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -344,11 +344,11 @@
                     </androidx.cardview.widget.CardView>
 
                     <TextView
-                        android:id="@+id/todayText"
+                        android:id="@+id/todayTextFavorite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/cardInformation"
+                        app:layout_constraintTop_toBottomOf="@id/cardInformationFavorite"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:textColor="@color/white"
@@ -356,19 +356,19 @@
                         android:text="@string/today"/>
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerToday"
+                        android:id="@+id/recyclerTodayFavorite"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/todayText"
+                        app:layout_constraintTop_toBottomOf="@id/todayTextFavorite"
                         android:layout_marginTop="5dp"
                         app:layout_constraintStart_toStartOf="parent"/>
 
                     <TextView
-                        android:id="@+id/dayText"
+                        android:id="@+id/dayTextFavorite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/recyclerToday"
+                        app:layout_constraintTop_toBottomOf="@id/recyclerTodayFavorite"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:textColor="@color/white"
@@ -376,19 +376,19 @@
                         android:text="@string/day"/>
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerWeekly"
+                        android:id="@+id/recyclerWeeklyFavorite"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/secondary_color"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/dayText"
+                        app:layout_constraintTop_toBottomOf="@id/dayTextFavorite"
                         android:layout_marginTop="10dp"/>
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/recyclerWeekly"
+                        app:layout_constraintTop_toBottomOf="@id/recyclerWeeklyFavorite"
                         app:layout_constraintBottom_toBottomOf="parent"/>
 
 
@@ -411,5 +411,4 @@
         android:visibility="gone"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loading" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

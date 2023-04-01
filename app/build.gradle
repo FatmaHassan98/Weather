@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id "androidx.navigation.safeargs.kotlin"
+
 }
 
 android {
@@ -75,5 +77,7 @@ dependencies {
 // Lottie dependency
     implementation "com.airbnb.android:lottie:5.2.0"
 
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
 
 }
