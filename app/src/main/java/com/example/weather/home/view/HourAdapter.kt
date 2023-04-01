@@ -31,7 +31,7 @@ class HourAdapter(private val context: Context) : ListAdapter<Hourly, HourAdapte
         holder.binding.textTempHour.text = getItem(position).temp.toString()
 
         Glide.with(context)
-        .load(getItem(position).weather[0].icon)
+        .load("https://openweathermap.org/img/wn/"+getItem(position).weather[0].icon+"@2x.png")
         .apply( RequestOptions()
             .override(holder.binding.imageHour.width,holder.binding.imageHour.height))
         .into(holder.binding.imageHour)

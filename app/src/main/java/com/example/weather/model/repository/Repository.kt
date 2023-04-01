@@ -1,6 +1,7 @@
 package com.example.weather.model.repository
 
 import com.example.weather.database.room.LocalSource
+import com.example.weather.database.room.entity.EntityFavorite
 import com.example.weather.database.room.entity.EntityHome
 import com.example.weather.model.pojos.WeatherResponse
 import com.example.weather.network.RemoteSource
@@ -34,6 +35,14 @@ class Repository private constructor(var remoteSource: RemoteSource,
 
     override suspend fun insertHomeWeather(entityHome: EntityHome) {
         localSource.insertHomeWeather(entityHome)
+    }
+
+    override val getFavorite: Flow<List<EntityFavorite>> = localSource.getFavorite
+    override suspend fun insertFavorite(entityFavorite: EntityFavorite) {
+        localSource.insertFavorite(entityFavorite)
+    }
+    override suspend fun deleteFavorite(entityFavorite: EntityFavorite) {
+        localSource.deleteFavorite(entityFavorite)
     }
 
 }

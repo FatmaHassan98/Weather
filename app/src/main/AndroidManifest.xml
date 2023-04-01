@@ -16,8 +16,6 @@
         android:theme="@style/Theme.Weather"
         tools:targetApi="31">
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyACXtCUztBoV0C8crJXJ6czIrLmmWEV2Aw" />
@@ -28,7 +26,6 @@
             android:label="@string/title_activity_maps" >
 
         </activity>
-
 
         <activity
             android:name=".view.SplashScreenActivity"

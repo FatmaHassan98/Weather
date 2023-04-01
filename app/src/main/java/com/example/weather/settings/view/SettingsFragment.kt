@@ -1,16 +1,20 @@
 package com.example.weather.settings.view
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.example.weather.R
 import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.databinding.FragmentSettingsBinding
+import com.example.weather.map.view.MapsActivity
 import com.example.weather.settings.viewmodel.SettingsViewModel
 import com.example.weather.settings.viewmodel.SettingsViewModelFactory
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SettingsFragment : Fragment() {
 
@@ -45,16 +49,19 @@ class SettingsFragment : Fragment() {
         settingsViewModel = ViewModelProvider(this,settingsViewModelFactory)[SettingsViewModel::class.java]
 
         binding.btnSave.setOnClickListener{
-            location = if(binding.gpsLocation.isChecked) {
-                "GPS"
+            if(binding.gpsLocation.isChecked) {
+               location = "GPS"
             } else {
-                "Map"
+                location = "Map"
+                SharedPreferenceSource.getInstance(requireContext()).setMap("Home")
+                val intent = Intent(requireActivity(),MapsActivity::class.java)
+                requireActivity().startActivity(intent)
             }
 
             language = if (binding.arabicLanguage.isChecked){
-                "arabic"
+                "ar"
             }else{
-                "english"
+                "en"
             }
 
             temperature = if(binding.celsiusTemperature.isChecked){

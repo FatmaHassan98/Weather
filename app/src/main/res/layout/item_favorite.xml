@@ -5,10 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardFavorite"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:backgroundTint="@color/secondary_color"
         app:cardCornerRadius="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,6 +26,7 @@
                 android:id="@+id/cityFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:textSize="20sp"
@@ -33,6 +37,7 @@
                 android:id="@+id/temperatureFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cityFavorite"
                 android:textSize="20sp"
@@ -43,6 +48,7 @@
                 android:id="@+id/statusFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/temperatureFavorite"
                 android:textSize="20sp"
@@ -53,28 +59,33 @@
                 android:id="@+id/descriptionFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/statusFavorite"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:textSize="20sp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="15dp"/>
+                android:layout_marginTop="5dp" />
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
+                android:id="@+id/imageFavorite"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="150dp"
+                android:layout_marginTop="15dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="@id/cityFavorite"/>
 
                 <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationDelete"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="15dp"
+                    app:lottie_autoPlay="true"
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/delete"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -15,7 +15,11 @@
         android:id="@+id/navigation_favorite"
         android:name="com.example.weather.favorite.view.FavoriteFragment"
         android:label="@string/title_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_navigation_favorite_to_viewFavoriteFragment"
+            app:destination="@id/viewFavoriteFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_alerts"
@@ -27,4 +31,14 @@
         android:name="com.example.weather.settings.view.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/viewFavoriteFragment"
+        android:name="com.example.weather.favorite.view.ViewFavoriteFragment"
+        android:label="fragment_view_favorite"
+        tools:layout="@layout/fragment_view_favorite">
+
+        <argument
+            android:name="EntityFavorite"
+            app:argType="com.example.weather.database.room.entity.EntityFavorite" />
+    </fragment>
 </navigation>
