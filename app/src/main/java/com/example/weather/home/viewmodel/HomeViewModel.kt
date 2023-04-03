@@ -26,10 +26,6 @@ class HomeViewModel (private val repositoryInterface: RepositoryInterface,
     val weather = MutableStateFlow<APIState>(state)
     val room = MutableStateFlow<RoomStatus>(RoomStatus.Loading)
 
-    init {
-        getHomeWeather()
-    }
-
     fun getWeather(lat: Double, lon: Double, units: String, lang:String) {
         viewModelScope.launch{
             repositoryInterface.getWeather(lat,lon,units,lang).catch {
@@ -64,7 +60,7 @@ class HomeViewModel (private val repositoryInterface: RepositoryInterface,
             repositoryInterface.insertHomeWeather(entityHome)
         }
     }
-    private fun getHomeWeather(){
+    fun getHomeWeather(){
         viewModelScope.launch(Dispatchers.IO)  {
             repositoryInterface.getHomeWeather.catch {
                 e-> room.value = RoomStatus.Failure(e)

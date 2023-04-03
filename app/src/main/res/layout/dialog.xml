@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/from"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/startDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/from"
+        app:layout_constraintTop_toBottomOf="@id/from"
+        app:layout_constraintEnd_toEndOf="@id/from"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:hint="@string/enter_start_time" />
+
+    <TextView
+        android:id="@+id/to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/to"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/endDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/to"
+        app:layout_constraintTop_toBottomOf="@id/to"
+        app:layout_constraintEnd_toEndOf="@id/to"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:hint="@string/enter_end_time" />
+
+    <TextView
+        android:id="@+id/cityAlertDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/startDate"
+        app:layout_constraintEnd_toStartOf="@id/endDate"
+        app:layout_constraintTop_toBottomOf="@id/startDate"
+        android:textSize="20sp"
+
+        android:hint="@string/enter_location"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/locationAlert"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:layout_constraintStart_toStartOf="@id/cityAlertDialog"
+        app:layout_constraintEnd_toEndOf="@id/cityAlertDialog"
+        app:layout_constraintTop_toBottomOf="@id/cityAlertDialog"
+        app:layout_constraintBottom_toTopOf="@id/alertType"
+        android:layout_marginTop="10dp"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/location"
+        app:lottie_loop="true" />
+
+    <RadioGroup
+        android:id="@+id/alertType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/locationAlert"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <RadioButton
+            android:id="@+id/notificationAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="40dp"
+            android:text="@string/notification"
+            android:shadowColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp"
+            android:layout_marginBottom="5dp"/>
+
+        <RadioButton
+            android:id="@+id/alarmAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/notificationAlert"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="30dp"
+            android:text="@string/alarm"
+            android:shadowColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp" />
+
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancelAlert"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/saveAlert"
+        app:layout_constraintTop_toBottomOf="@id/alertType"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/cansel"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/white"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/saveAlert"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cancelAlert"
+        app:layout_constraintTop_toBottomOf="@id/alertType"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/save"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,51 +48,59 @@ class SettingsFragment : Fragment() {
 
         settingsViewModel = ViewModelProvider(this,settingsViewModelFactory)[SettingsViewModel::class.java]
 
-        binding.btnSave.setOnClickListener{
-            if(binding.gpsLocation.isChecked) {
-               location = "GPS"
-            } else {
-                location = "Map"
-                SharedPreferenceSource.getInstance(requireContext()).setMap("Home")
-                val intent = Intent(requireActivity(),MapsActivity::class.java)
-                requireActivity().startActivity(intent)
-            }
+        binding.gpsLocation.setOnClickListener {
+            settingsViewModel.setLocationWay("Gps")
+        }
 
-            language = if (binding.arabicLanguage.isChecked){
-                "ar"
-            }else{
-                "en"
-            }
+        binding.mapLocation.setOnClickListener {
+            settingsViewModel.setLocationWay("Map")
+            SharedPreferenceSource.getInstance(requireContext()).setMap("Home")
+            val intent = Intent(requireActivity(),MapsActivity::class.java)
+            requireActivity().startActivity(intent)
+        }
 
-            temperature = if(binding.celsiusTemperature.isChecked){
-                "metric"
-            }else if(binding.kelvinTemperature.isChecked){
-                "default"
-            }else{
-                "imperial"
-            }
+        binding.arabicLanguage.setOnClickListener {
+            settingsViewModel.setLanguage("ar")
+        }
 
-            wind = if (binding.meterWind.isChecked){
-                "metric"
-            }else{
-                "imperial"
-            }
+        binding.arabicLanguage.setOnClickListener {
+            settingsViewModel.setLanguage("en")
+        }
 
-            notification = if (binding.enableNotification.isChecked){
-                "enable"
-            }else{
-                "disable"
-            }
+        binding.celsiusTemperature.setOnClickListener {
+            settingsViewModel.setUnit("metric")
+        }
 
-            theme = if (binding.lightTheme.isChecked){
-                "light"
-            }else{
-                "dark"
-            }
+        binding.kelvinTemperature.setOnClickListener {
+            settingsViewModel.setUnit("default")
+        }
 
-            settingsViewModel.setSetting(location, language, temperature,
-                wind, notification, theme)
+        binding.fahrenheitTemperature.setOnClickListener {
+            settingsViewModel.setUnit("imperial")
+        }
 
+        binding.meterWind.setOnClickListener {
+            settingsViewModel.setUnit("metric")
+        }
+
+        binding.mileWind.setOnClickListener {
+            settingsViewModel.setUnit("imperial")
+        }
+
+        binding.enableNotification.setOnClickListener {
+            settingsViewModel.setNotification("enable")
+        }
+
+        binding.disableNotification.setOnClickListener {
+            settingsViewModel.setNotification("disable")
+        }
+
+        binding.lightTheme.setOnClickListener {
+            settingsViewModel.setTheme("light")
+        }
+
+        binding.lightTheme.setOnClickListener {
+            settingsViewModel.setTheme("dark")
         }
 
         if (settingsViewModel.getSavedLocationWay()=="GPS"){
@@ -132,7 +140,6 @@ class SettingsFragment : Fragment() {
         }else{
             binding.darkTheme.isChecked = true
         }
-
 
     }
 

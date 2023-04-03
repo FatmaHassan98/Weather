@@ -104,7 +104,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
                             SharedPreferenceSource.getInstance(this@MapsActivity).getLat(),
                             SharedPreferenceSource.getInstance(this@MapsActivity).getLon(),
                             SharedPreferenceSource.getInstance(this@MapsActivity)
-                                .getSavedTemperatureUnit(),
+                                .getSavedUnit(),
                             SharedPreferenceSource.getInstance(this@MapsActivity).getSavedLanguage()
                         )
 
@@ -135,8 +135,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
                             }
                         }
                     }
-                } else {
+                } else if (SharedPreferenceSource.getInstance(this).getSavedMap() == "alert") {
+
+                    SharedPreferenceSource.getInstance(this).setLatAndLonAlert(lat, lon)
+
+                }else{
+
                     SharedPreferenceSource.getInstance(this).setLatAndLonHome(lat, lon)
+
                 }
             }else{
                 Snackbar.make(

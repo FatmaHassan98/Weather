@@ -1,6 +1,7 @@
 package com.example.weather.database.room
 
 import android.content.Context
+import com.example.weather.database.room.entity.EntityAlert
 import com.example.weather.database.room.entity.EntityFavorite
 import com.example.weather.database.room.entity.EntityHome
 import kotlinx.coroutines.flow.Flow
@@ -26,6 +27,19 @@ class ConceretLocalSource(context: Context) : LocalSource {
 
     override suspend fun deleteFavorite(entityFavorite: EntityFavorite) {
         weatherDao.deleteFavorite(entityFavorite)
+    }
+
+    override val getAlert: Flow<List<EntityAlert>> = weatherDao.getAlert
+
+    override suspend fun insertAlert(entityAlert: EntityAlert) {
+        weatherDao.insertAlert(entityAlert)
+    }
+
+    override suspend fun deleteAlert(entityAlert: EntityAlert) {
+        weatherDao.deleteAlert(entityAlert)
+    }
+    override fun getAlertById(id: String): Flow<EntityAlert> {
+        return weatherDao.getAlertById(id)
     }
 
 

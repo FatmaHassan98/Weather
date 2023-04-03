@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/initialImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/baseline_settings_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/initialImage"
+        app:layout_constraintStart_toEndOf="@id/initialImage"
+        app:layout_constraintBottom_toBottomOf="@id/initialImage"
+        android:layout_marginStart="10dp"
+        android:text="@string/initial_setup"/>
+
+    <TextView
+        android:id="@+id/initialLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/location"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/initialImage"/>
+
+
+    <RadioGroup
+        android:id="@+id/initialGroupLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@id/initialLocation"
+        app:layout_constraintTop_toTopOf="@id/initialLocation"
+        app:layout_constraintBottom_toBottomOf="@id/initialLocation"
+        android:layout_marginStart="15dp">
+
+        <RadioButton
+            android:id="@+id/initialGps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gps"
+            android:textSize="16sp"
+            android:layout_marginStart="60dp"/>
+
+        <RadioButton
+            android:id="@+id/initialMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/map"
+            android:textSize="16sp"
+            android:layout_marginStart="30dp"/>
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/initialGroupLocation"
+        android:layout_marginStart="20dp"
+        android:text="@string/notification"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"/>
+
+    <Switch
+        android:id="@+id/initialNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/initialGroupLocation"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/initialSave"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/initialNotification"
+        android:text="@string/save"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

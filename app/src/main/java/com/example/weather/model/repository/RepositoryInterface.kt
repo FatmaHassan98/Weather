@@ -2,6 +2,7 @@ package com.example.weather.model.repository
 
 import androidx.room.Delete
 import androidx.room.Insert
+import com.example.weather.database.room.entity.EntityAlert
 import com.example.weather.database.room.entity.EntityFavorite
 import com.example.weather.database.room.entity.EntityHome
 import com.example.weather.model.pojos.WeatherResponse
@@ -17,4 +18,9 @@ interface RepositoryInterface {
     val getFavorite : Flow<List<EntityFavorite>>
     suspend fun insertFavorite(entityFavorite: EntityFavorite)
     suspend fun deleteFavorite(entityFavorite: EntityFavorite)
+
+    val getAlert : Flow<List<EntityAlert>>
+    suspend fun insertAlert(entityAlert: EntityAlert)
+    suspend fun deleteAlert(entityAlert: EntityAlert)
+    fun getAlertById(id:String):Flow<EntityAlert>
 }

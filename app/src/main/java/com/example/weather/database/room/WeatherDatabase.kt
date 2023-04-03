@@ -3,10 +3,11 @@ package com.example.weather.database.room
 import android.content.Context
 import androidx.room.*
 import com.example.weather.database.room.converter.Converter
+import com.example.weather.database.room.entity.EntityAlert
 import com.example.weather.database.room.entity.EntityFavorite
 import com.example.weather.database.room.entity.EntityHome
 
-@Database(entities = [EntityHome::class,EntityFavorite::class], version = 2)
+@Database(entities = [EntityHome::class,EntityFavorite::class,EntityAlert::class], version = 5)
 @TypeConverters(Converter::class)
 abstract class WeatherDatabase : RoomDatabase() {
 

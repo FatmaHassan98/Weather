@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.weather.R
 import com.example.weather.databinding.ItemDayBinding
 import com.example.weather.model.pojos.Daily
 import java.text.SimpleDateFormat
@@ -27,7 +28,7 @@ class DayAdapter (private val context: Context) : ListAdapter<Daily, DayAdapter.
         return ViewHolder(binding)
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "ResourceAsColor")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.textDay.text = getDayFromTimestamp(getItem(position).dt)
         holder.binding.textTempDay.text =
