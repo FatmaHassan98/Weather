@@ -12,6 +12,8 @@ interface RepositoryInterface {
 
     suspend fun getWeather(lat: Double,lon: Double,units: String,lang:String) : Flow<WeatherResponse>
 
+    suspend fun getWeatherAlert (lat: Double,lon: Double,units: String,lang:String) : WeatherResponse
+
     val getHomeWeather : Flow<EntityHome>
     suspend fun insertHomeWeather(entityHome: EntityHome)
 
@@ -22,5 +24,5 @@ interface RepositoryInterface {
     val getAlert : Flow<List<EntityAlert>>
     suspend fun insertAlert(entityAlert: EntityAlert)
     suspend fun deleteAlert(entityAlert: EntityAlert)
-    fun getAlertById(id:String):Flow<EntityAlert>
+    fun getAlertById(id:String): EntityAlert
 }

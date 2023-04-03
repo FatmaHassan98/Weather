@@ -28,8 +28,11 @@ class Repository private constructor(var remoteSource: RemoteSource,
     }
 
     override suspend fun getWeather(lat: Double,lon: Double,units: String,lang:String): Flow<WeatherResponse> {
-
         return flowOf( remoteSource.getWeather(lat,lon,units,lang) )
+    }
+
+    override suspend fun getWeatherAlert(lat: Double,lon: Double,units: String,lang:String): WeatherResponse {
+        return remoteSource.getWeather(lat,lon,units,lang)
     }
 
     override val getHomeWeather: Flow<EntityHome> = localSource.getHomeWeather
@@ -52,7 +55,7 @@ class Repository private constructor(var remoteSource: RemoteSource,
     override suspend fun deleteAlert(entityAlert: EntityAlert) {
         localSource.deleteAlert(entityAlert)
     }
-    override fun getAlertById(id: String): Flow<EntityAlert> {
+    override fun getAlertById(id: String): EntityAlert {
         return localSource.getAlertById(id)
     }
 

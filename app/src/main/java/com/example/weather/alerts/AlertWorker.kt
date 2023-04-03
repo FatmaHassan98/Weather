@@ -1,6 +1,5 @@
 package com.example.weather.alerts
 
-import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.Context.WINDOW_SERVICE
@@ -38,7 +37,6 @@ class AlertWorker (private var context: Context, private var workerParameters: W
 
     private lateinit var notificationManager: NotificationManager
     private lateinit var repository:Repository
-    private lateinit var entityAlert: EntityAlert
 
     private var LAYOUT_FLAG  = 0
 
@@ -52,6 +50,7 @@ class AlertWorker (private var context: Context, private var workerParameters: W
 
         val start = inputData.getLong(Utaliltes.TIME,0)
         val id = inputData.getString(Utaliltes.ID)
+        lateinit var resultData:Result
 
         LAYOUT_FLAG = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
@@ -61,51 +60,63 @@ class AlertWorker (private var context: Context, private var workerParameters: W
         delay(start)
 
         try{
-            repository.getAlertById(id.toString()).collectLatest {
-                entityAlert = it
-            }
+            val entityAlert = repository.getAlertById(id.toString())
 
             if(checkForInternet(context)){
-               repository.getWeather(
-                    entityAlert.lat,
-                    entityAlert.lon,
-                    SharedPreferenceSource.getInstance(context).getSavedTemperatureUnit(),
-                    SharedPreferenceSource.getInstance(context).getSavedLanguage()).collectLatest {
+               val response = repository.getWeatherAlert(
+                   42.55,
+                   -99.84,
+                    SharedPreferenceSource.getInstance(context).getSavedUnit(),
+                    SharedPreferenceSource.getInstance(context).getSavedLanguage())
 
-                   description = if (it.alerts.isNullOrEmpty()){
-                       "It’s Fine"
-                   }else{
-                       it.alerts[0].description
-                   }
+                withContext(Dispatchers.IO){
+                    if (!response.equals(null)){
+                        if (!response.alerts.isNullOrEmpty()) {
+                            for (i in 0 until (response.alerts.size)) {
+                                description +=   response.alerts[i].sender_name +"\n"
+                            }
+                        }else{
+                            description = "It’s Fine"
+                        }
+                        resultData= Result.success()
 
-               }
+                    }else{
+                        description = "It’s Fine"
+                        resultData= Result.failure()
+                    }
+                }
 
                 if (SharedPreferenceSource.getInstance(context).getSavedNotificationStatus()
                     =="enable") {
-                    println("noooooooooooooooooooooooooooooooo")
 
                     if (entityAlert.notification == "notification") {
                         notification(description)
                         repository.deleteAlert(entityAlert)
                     } else {
-                        alarm(context,description)
+                        alarm(context,description,entityAlert)
                     }
                 }
 
             }else{
                 if (SharedPreferenceSource.getInstance(context).getSavedNotificationStatus()=="enable") {
 
-                    content = if (entityAlert.alert.isNullOrEmpty()){
-                        "It’s Fine"
+                    if (entityAlert.alert.isEmpty()){
+                        content = "It’s Fine"
                     }else{
-                        entityAlert.alert[0].description
+                        if (entityAlert.alert.isNotEmpty()) {
+                            for (i in 0 until (entityAlert.alert.size)) {
+                                content += entityAlert.alert[i].sender_name + ", "
+                            }
+                        }else{
+                            content = "It’s Fine"
+                        }
                     }
 
                     if (entityAlert.notification == "notification") {
                         notification(content)
                         repository.deleteAlert(entityAlert)
                     } else {
-                        alarm(context,content)
+                        alarm(context,content,entityAlert)
 
                     }
                 }
@@ -113,9 +124,10 @@ class AlertWorker (private var context: Context, private var workerParameters: W
 
         }catch (e:Exception){
             e.printStackTrace()
+            resultData= Result.failure()
         }
 
-        return Result.success()
+        return resultData
     }
 
     private fun notification(description : String){
@@ -154,7 +166,7 @@ class AlertWorker (private var context: Context, private var workerParameters: W
 
     }
 
-    private suspend fun alarm(context: Context, message: String) {
+    private suspend fun alarm(context: Context, message: String,entityAlert: EntityAlert) {
 
         val mediaPlayer = MediaPlayer.create(context, R.raw.alarm_sound)
 

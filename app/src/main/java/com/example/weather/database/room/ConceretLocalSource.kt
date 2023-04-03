@@ -38,7 +38,7 @@ class ConceretLocalSource(context: Context) : LocalSource {
     override suspend fun deleteAlert(entityAlert: EntityAlert) {
         weatherDao.deleteAlert(entityAlert)
     }
-    override fun getAlertById(id: String): Flow<EntityAlert> {
+    override fun getAlertById(id: String): EntityAlert {
         return weatherDao.getAlertById(id)
     }
 

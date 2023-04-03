@@ -2,10 +2,8 @@ package com.example.weather.alerts.view
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
 import android.app.Dialog
 import android.app.TimePickerDialog
-import android.app.TimePickerDialog.OnTimeSetListener
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -21,8 +19,8 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -50,8 +48,10 @@ import com.example.weather.network.APIState
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.sql.Time
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.time.Duration.Companion.milliseconds
 
 
 class AlertsFragment : Fragment() , AlertOnClicklistener{
@@ -61,6 +61,10 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
     private lateinit var alertViewModelFactory: AlertViewModelFactory
     private lateinit var entityAlert: EntityAlert
     private lateinit var alertAdapter: AlertAdapter
+    private var startDateCompare = ""
+    private var endDateCompare = ""
+    private var startTime =""
+    private var endTime = ""
 
 
     override fun onCreateView(
@@ -74,6 +78,7 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -128,7 +133,8 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
         }
     }
 
-    @SuppressLint("SetTextI18n")
+    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     private fun showDialog() {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -157,6 +163,7 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
             val datePickerDialog = DatePickerDialog(requireContext(),
                 { _, year, monthOfYear, dayOfMonth ->
                     startDate.text = formatDate(year,monthOfYear,dayOfMonth)
+                    startDateCompare = formatDate(year,monthOfYear,dayOfMonth)
 
                     val cTime = Calendar.getInstance()
                     val mHour = cTime[Calendar.HOUR_OF_DAY]
@@ -166,6 +173,7 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
                         { _, hourOfDay, minute ->
                             startDate.append("\n     ${formatTime(hourOfDay, minute)}")
                             entityAlert.start = startDate.text.toString()
+                            startTime = formatTime(hourOfDay, minute)
                         },
                         mHour,
                         mMinute,
@@ -189,7 +197,7 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
             val datePickerDialog = DatePickerDialog(requireContext(),
                  { _, year, monthOfYear, dayOfMonth ->
                     endDate.text = formatDate(year,monthOfYear,dayOfMonth)
-
+                     endDateCompare = formatDate(year,monthOfYear,dayOfMonth)
                     val cTime = Calendar.getInstance()
                     val mHour = cTime[Calendar.HOUR_OF_DAY]
                     val mMinute = cTime[Calendar.MINUTE]
@@ -198,6 +206,7 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
                         { _, hourOfDay, minute ->
                             endDate.append("\n     ${formatTime(hourOfDay, minute)}")
                             entityAlert.end = endDate.text.toString()
+                            endTime = formatTime(hourOfDay, minute)
                         },
                         mHour,
                         mMinute,
@@ -264,21 +273,45 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
                     entityAlert.notification = "alarm"
                 }
 
-                alertViewModel.insertAlert(entityAlert)
+                val ft = SimpleDateFormat("dd-MM-yyyy")
 
-                val inputData = Data.Builder()
-                inputData.putString(Utaliltes.ID, entityAlert.id)
-                inputData.putLong(Utaliltes.TIME,10000)
+                val str = ft.format(Date())
 
-                val myWorkRequest: WorkRequest =
-                    OneTimeWorkRequestBuilder<AlertWorker>()
-                        .setInputData(inputData.build())
-                        .build()
+                val calendar = Calendar.getInstance()
+                val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+                val time =  dateFormat.format(calendar.time)
 
-                WorkManager.getInstance(requireContext())
-                    .enqueue(myWorkRequest)
+                if(startDateCompare >= str && endDateCompare >= startDateCompare){
+                    if(startTime>=time && endTime > startTime ){
+                        alertViewModel.insertAlert(entityAlert)
 
-                dialog.dismiss()
+                        val startValue = Time(dateFormat.parse(startTime)!!.time)
+                        val endValue = Time(dateFormat.parse(time)!!.time)
+                        val delay = (startValue.time - endValue.time).milliseconds.inWholeMilliseconds
+
+                        val inputData = Data.Builder()
+                        inputData.putString(Utaliltes.ID, entityAlert.id)
+                        inputData.putLong(Utaliltes.TIME,delay)
+
+
+                        val myWorkRequest: WorkRequest =
+                            OneTimeWorkRequestBuilder<AlertWorker>()
+                                .setInputData(inputData.build())
+                                .build()
+
+                        WorkManager.getInstance(requireContext())
+                            .enqueue(myWorkRequest)
+
+                        dialog.dismiss()
+
+                    }else{
+                        Snackbar.make(binding.root,"Please, entre correct Time",Snackbar.LENGTH_SHORT).show()
+                    }
+                }else{
+                    Snackbar.make(binding.root,"Please, entre correct date",Snackbar.LENGTH_SHORT).show()
+                }
+
+
             }else{
                 Snackbar.make(binding.root,"Please, entre all data",Snackbar.LENGTH_SHORT).show()
             }

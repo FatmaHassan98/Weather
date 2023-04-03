@@ -136,13 +136,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
                         }
                     }
                 } else if (SharedPreferenceSource.getInstance(this).getSavedMap() == "alert") {
-
                     SharedPreferenceSource.getInstance(this).setLatAndLonAlert(lat, lon)
-
                 }else{
-
                     SharedPreferenceSource.getInstance(this).setLatAndLonHome(lat, lon)
-
                 }
             }else{
                 Snackbar.make(
