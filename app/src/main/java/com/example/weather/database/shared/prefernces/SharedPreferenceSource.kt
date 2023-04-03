@@ -37,6 +37,30 @@ class SharedPreferenceSource private constructor(context: Context){
         editor!!.putString(Utaliltes.THEME, theme)
         editor!!.commit()
     }
+    fun setLocationWay(location: String){
+        editor!!.putString(Utaliltes.LOCATION, location)
+        editor!!.commit()
+    }
+
+    fun setLanguage(language: String){
+        editor!!.putString(Utaliltes.LANGUAGE, language)
+        editor!!.commit()
+    }
+
+    fun setUnit(unit:String){
+        editor!!.putString(Utaliltes.UNIT, unit)
+        editor!!.commit()
+    }
+
+    fun setNotification(notification: String){
+        editor!!.putString(Utaliltes.NOTIFICATION, notification)
+        editor!!.commit()
+    }
+
+    fun setTheme(theme: String){
+        editor!!.putString(Utaliltes.THEME, theme)
+        editor!!.commit()
+    }
     fun setMap(map:String){
         editor!!.putString(Utaliltes.MAP,map)
         editor!!.commit()
@@ -50,6 +74,20 @@ class SharedPreferenceSource private constructor(context: Context){
         editor!!.putFloat(Utaliltes.LAT_HOME,lat.toFloat())
         editor!!.putFloat(Utaliltes.LON_HOME,lon.toFloat())
         editor!!.commit()
+    }
+
+    fun setLatAndLonAlert(lat:Double,lon:Double){
+        editor!!.putFloat(Utaliltes.LAT_ALERT,lat.toFloat())
+        editor!!.putFloat(Utaliltes.LON_ALERT,lon.toFloat())
+        editor!!.commit()
+    }
+
+    fun getLatAlert():Double{
+        return return sharedPreferences!!.getFloat(Utaliltes.LAT_ALERT,0.0f).toDouble()
+    }
+
+    fun getLonAlert():Double{
+        return return sharedPreferences!!.getFloat(Utaliltes.LON_ALERT,0.0f).toDouble()
     }
 
     fun getLatHome():Double{
@@ -85,6 +123,10 @@ class SharedPreferenceSource private constructor(context: Context){
     }
     fun getSavedMap(): String? {
         return sharedPreferences!!.getString(Utaliltes.MAP,"home")
+    }
+
+    fun getSavedUnit():String{
+        return sharedPreferences?.getString(Utaliltes.UNIT,"metric").toString()
     }
 
 }

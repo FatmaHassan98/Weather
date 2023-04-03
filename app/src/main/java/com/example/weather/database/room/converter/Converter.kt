@@ -42,4 +42,10 @@ class Converter {
 
     @TypeConverter
     fun fromStringToDaily(daily: String) = Gson().fromJson(daily, Array<Daily>::class.java).toList()
+
+    @TypeConverter
+    fun fromAlertToString(alert: List<Alert>) :String= Gson().toJson(alert)
+
+    @TypeConverter
+    fun fromStringToAlert(alert: String) = Gson().fromJson(alert, Array<Alert>::class.java).toList()
 }

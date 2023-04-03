@@ -1,6 +1,7 @@
 package com.example.weather.model.repository
 
 import com.example.weather.database.room.LocalSource
+import com.example.weather.database.room.entity.EntityAlert
 import com.example.weather.database.room.entity.EntityFavorite
 import com.example.weather.database.room.entity.EntityHome
 import com.example.weather.model.pojos.WeatherResponse
@@ -43,6 +44,16 @@ class Repository private constructor(var remoteSource: RemoteSource,
     }
     override suspend fun deleteFavorite(entityFavorite: EntityFavorite) {
         localSource.deleteFavorite(entityFavorite)
+    }
+    override val getAlert: Flow<List<EntityAlert>> = localSource.getAlert
+    override suspend fun insertAlert(entityAlert: EntityAlert) {
+        localSource.insertAlert(entityAlert)
+    }
+    override suspend fun deleteAlert(entityAlert: EntityAlert) {
+        localSource.deleteAlert(entityAlert)
+    }
+    override fun getAlertById(id: String): Flow<EntityAlert> {
+        return localSource.getAlertById(id)
     }
 
 }

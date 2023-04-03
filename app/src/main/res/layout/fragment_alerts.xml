@@ -35,12 +35,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerAlerts"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardAlerts"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addAlert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
@@ -65,6 +68,7 @@
         app:lottie_rawRes="@raw/notification" />
 
     <TextView
+        android:id="@+id/noAlert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/animationNotification"

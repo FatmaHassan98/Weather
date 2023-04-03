@@ -1,6 +1,7 @@
 package com.example.weather.favorite.view
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
@@ -78,15 +80,21 @@ class FavoriteFragment : Fragment() , FavoriteClickLisener {
                         binding.animationFavorite.visibility = View.VISIBLE
                     }
                     is FavoriteStatus.Success ->{
-                        binding.recyclerFavorite.visibility = View.VISIBLE
-                        binding.animationFavorite.visibility = View.GONE
+                        if (it.entityFavorite.isEmpty()) {
+                            binding.recyclerFavorite.visibility = View.GONE
+                            binding.animationFavorite.visibility = View.VISIBLE
+                        }else {
+                            binding.recyclerFavorite.visibility = View.VISIBLE
+                            binding.animationFavorite.visibility = View.GONE
 
-                        favoriteAdapter = FavoriteAdapter(requireContext(),this@FavoriteFragment)
-                        binding.recyclerFavorite.apply {
-                            adapter = favoriteAdapter
-                            favoriteAdapter.submitList(it.entityFavorite)
-                            layoutManager = LinearLayoutManager(context).apply {
-                                orientation = RecyclerView.VERTICAL
+                            favoriteAdapter =
+                                FavoriteAdapter(requireContext(), this@FavoriteFragment)
+                            binding.recyclerFavorite.apply {
+                                adapter = favoriteAdapter
+                                favoriteAdapter.submitList(it.entityFavorite)
+                                layoutManager = LinearLayoutManager(context).apply {
+                                    orientation = RecyclerView.VERTICAL
+                                }
                             }
                         }
                     }else ->{
@@ -99,7 +107,23 @@ class FavoriteFragment : Fragment() , FavoriteClickLisener {
     }
 
     override fun deleteFavorite(entityFavorite: EntityFavorite) {
-        favoriteViewModel.deleteFavorite(entityFavorite)
+        val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(context)
+        builder.setMessage("Are you sure!\nYou want to delete this item ?")
+        builder.setCancelable(false)
+        builder.setPositiveButton("Yes"){ dialog: DialogInterface, which: Int ->
+            favoriteViewModel.deleteFavorite(entityFavorite)
+            dialog.cancel()
+        }
+        builder.setNegativeButton("No"){ dialog: DialogInterface, which: Int ->
+            dialog.cancel()
+        }
+        val alertDialog: android.app.AlertDialog? = builder.create()
+        alertDialog?.show()
+    }
+
+    override fun showData(entityFavorite: EntityFavorite) {
+        val action = FavoriteFragmentDirections.actionNavigationFavoriteToViewFavoriteFragment(entityFavorite)
+        binding.root.findNavController().navigate(action)
     }
 
     private fun checkForInternet(context: Context): Boolean {

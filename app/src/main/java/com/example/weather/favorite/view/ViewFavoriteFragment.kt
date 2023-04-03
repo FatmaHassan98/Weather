@@ -19,15 +19,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.weather.database.room.ConceretLocalSource
-import com.example.weather.database.room.FavoriteStatus
-import com.example.weather.database.room.RoomStatus
 import com.example.weather.database.room.entity.EntityFavorite
-import com.example.weather.database.room.entity.EntityHome
 import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.databinding.FragmentViewFavoriteBinding
 import com.example.weather.favorite.viewmodel.FavoriteViewModel
 import com.example.weather.favorite.viewmodel.FavoriteViewModelFactory
-import com.example.weather.home.model.GPSLocation
 import com.example.weather.home.view.DayAdapter
 import com.example.weather.home.view.HourAdapter
 import com.example.weather.model.repository.Repository
@@ -38,7 +34,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class ViewFavoriteFragment : Fragment() {
 
@@ -77,7 +72,7 @@ class ViewFavoriteFragment : Fragment() {
                 item.lat,
                 item.lon,
                 SharedPreferenceSource.getInstance(requireContext())
-                    .getSavedTemperatureUnit(),
+                    .getSavedUnit(),
                 SharedPreferenceSource.getInstance(requireContext())
                     .getSavedLanguage()
             )

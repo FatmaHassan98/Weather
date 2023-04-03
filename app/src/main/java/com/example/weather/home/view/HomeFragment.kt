@@ -74,14 +74,14 @@ class HomeFragment : Fragment() {
                 homeViewModel.getWeather(
                     SharedPreferenceSource.getInstance(requireContext()).getLatHome(),
                     SharedPreferenceSource.getInstance(requireContext()).getLonHome(),
-                    SharedPreferenceSource.getInstance(requireContext()).getSavedTemperatureUnit(),
+                    SharedPreferenceSource.getInstance(requireContext()).getSavedUnit(),
                     SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage()
                 )
             }else{
                 homeViewModel.getWeather(
                     SharedPreferenceSource.getInstance(requireContext()).getLatHome(),
                     SharedPreferenceSource.getInstance(requireContext()).getLonHome(),
-                    SharedPreferenceSource.getInstance(requireContext()).getSavedTemperatureUnit(),
+                    SharedPreferenceSource.getInstance(requireContext()).getSavedUnit(),
                     SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage())
             }
 
@@ -164,6 +164,7 @@ class HomeFragment : Fragment() {
                 }
 
         }else{
+            homeViewModel.getHomeWeather()
             lifecycleScope.launch {
                 homeViewModel.room.collectLatest {
                     when (it) {
@@ -228,7 +229,9 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
     }
+
     private fun loading(){
         binding.animationLoading.visibility = View.VISIBLE
         binding.cardDetails.visibility = View.GONE
@@ -240,6 +243,7 @@ class HomeFragment : Fragment() {
         binding.temperature.visibility = View.GONE
         binding.locationText.visibility = View.GONE
     }
+
     private fun success(){
         binding.animationLoading.visibility = View.GONE
         binding.cardDetails.visibility = View.VISIBLE
@@ -251,12 +255,14 @@ class HomeFragment : Fragment() {
         binding.temperature.visibility = View.VISIBLE
         binding.locationText.visibility = View.VISIBLE
     }
+
     @SuppressLint("SimpleDateFormat")
     private fun getHourFromTimestamp(timestamp: Long): String {
         val time = Date(timestamp * 1000)
         val simpleDateFormat = SimpleDateFormat("h:mm aaa")
         return simpleDateFormat.format(time)
     }
+
     @SuppressLint("SimpleDateFormat")
     private fun getDateFromTimestamp(timestamp: Long):String{
         val time = Date(timestamp * 1000)

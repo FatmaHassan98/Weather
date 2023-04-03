@@ -2,12 +2,10 @@ package com.example.weather.favorite.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.DialogInterface
 import android.location.Address
 import android.location.Geocoder
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +14,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.weather.database.room.entity.EntityFavorite
 import com.example.weather.databinding.ItemFavoriteBinding
 import java.util.*
-
 
 class FavoriteAdapter(
     private val context: Context,
@@ -62,23 +59,11 @@ class FavoriteAdapter(
             .into(holder.binding.imageFavorite)
 
         holder.binding.animationDelete.setOnClickListener {
-            val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(context)
-            builder.setMessage("Are you sure about the deletion ?")
-            builder.setCancelable(false)
-            builder.setPositiveButton("Yes"){dialog: DialogInterface, which: Int ->
-                    favoriteClickLisener.deleteFavorite(getItem(position))
-                    dialog.cancel()
-                }
-            builder.setNegativeButton("No"){ dialog: DialogInterface, which: Int ->
-                    dialog.cancel()
-                }
-            val alertDialog: android.app.AlertDialog? = builder.create()
-            alertDialog?.show()
+            favoriteClickLisener.deleteFavorite(getItem(position))
         }
 
         holder.binding.cardFavorite.setOnClickListener {
-            val action = FavoriteFragmentDirections.actionNavigationFavoriteToViewFavoriteFragment(getItem(position))
-            holder.itemView.findNavController().navigate(action)
+            favoriteClickLisener.showData(getItem(position))
         }
     }
 

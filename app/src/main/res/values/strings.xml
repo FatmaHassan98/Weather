@@ -35,6 +35,20 @@
     <string name="dark">Dark</string>
     <string name="day">Day</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="start_at">Start at:</string>
+    <string name="end_at">End at:</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="alarm">Alarm</string>
+    <string name="enter_start_time">Enter start time</string>
+    <string name="enter_end_time">Enter end time</string>
+    <string name="notification">Notification</string>
+    <string name="cansel">Cancel</string>
+    <string name="enter_location">Enter Location</string>
+    <string name="weather_alarm">Weather Alert</string>
+    <string name="initial_setup">Initial Setup</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
