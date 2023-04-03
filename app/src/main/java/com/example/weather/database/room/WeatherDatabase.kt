@@ -7,7 +7,7 @@ import com.example.weather.database.room.entity.EntityAlert
 import com.example.weather.database.room.entity.EntityFavorite
 import com.example.weather.database.room.entity.EntityHome
 
-@Database(entities = [EntityHome::class,EntityFavorite::class,EntityAlert::class], version = 5)
+@Database(entities = [EntityHome::class,EntityFavorite::class,EntityAlert::class], version = 6)
 @TypeConverters(Converter::class)
 abstract class WeatherDatabase : RoomDatabase() {
 

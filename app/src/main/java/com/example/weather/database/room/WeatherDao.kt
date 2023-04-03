@@ -29,7 +29,7 @@ interface WeatherDao {
     @Delete
     suspend fun deleteAlert(entityAlert: EntityAlert)
     @Query("SELECT * FROM Alert Where id=:id")
-    fun getAlertById(id:String) : Flow<EntityAlert>
+    fun getAlertById(id:String) : EntityAlert
 
 
 }

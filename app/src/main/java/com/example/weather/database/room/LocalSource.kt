@@ -20,7 +20,7 @@ interface LocalSource {
     suspend fun insertAlert(entityAlert: EntityAlert)
     suspend fun deleteAlert(entityAlert: EntityAlert)
 
-    fun getAlertById(id:String) : Flow<EntityAlert>
+    fun getAlertById(id:String) : EntityAlert
 
 
 

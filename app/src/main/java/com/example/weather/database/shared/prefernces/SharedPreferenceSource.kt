@@ -104,10 +104,10 @@ class SharedPreferenceSource private constructor(context: Context){
         return sharedPreferences!!.getFloat(Utaliltes.MAP_VALUE_LON,0.0f).toDouble()
     }
     fun getSavedLocationWay(): String {
-        return sharedPreferences!!.getString(Utaliltes.LOCATION, "GPS")!!
+        return sharedPreferences!!.getString(Utaliltes.LOCATION, "")!!
     }
     fun getSavedLanguage(): String {
-        return sharedPreferences!!.getString(Utaliltes.LANGUAGE, "english")!!
+        return sharedPreferences!!.getString(Utaliltes.LANGUAGE, "en")!!
     }
     fun getSavedTemperatureUnit(): String {
         return sharedPreferences!!.getString(Utaliltes.TEMPERATURE, "metric")!!
@@ -116,13 +116,13 @@ class SharedPreferenceSource private constructor(context: Context){
         return sharedPreferences!!.getString(Utaliltes.WIND_SPEED, "metric")!!
     }
     fun getSavedNotificationStatus(): String {
-        return sharedPreferences!!.getString(Utaliltes.NOTIFICATION, "enable")!!
+        return sharedPreferences!!.getString(Utaliltes.NOTIFICATION, "")!!
     }
     fun getSavedTheme(): String {
         return sharedPreferences!!.getString(Utaliltes.THEME, "light")!!
     }
     fun getSavedMap(): String? {
-        return sharedPreferences!!.getString(Utaliltes.MAP,"home")
+        return sharedPreferences!!.getString(Utaliltes.MAP,"")
     }
 
     fun getSavedUnit():String{

@@ -22,12 +22,6 @@ class SettingsFragment : Fragment() {
     private lateinit var settingsViewModel: SettingsViewModel
     private lateinit var settingsViewModelFactory: SettingsViewModelFactory
 
-    private lateinit var location:String
-    private lateinit var language:String
-    private lateinit var temperature:String
-    private lateinit var wind:String
-    private lateinit var notification: String
-    private lateinit var theme:String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,7 +43,7 @@ class SettingsFragment : Fragment() {
         settingsViewModel = ViewModelProvider(this,settingsViewModelFactory)[SettingsViewModel::class.java]
 
         binding.gpsLocation.setOnClickListener {
-            settingsViewModel.setLocationWay("Gps")
+            settingsViewModel.setLocationWay("GPS")
         }
 
         binding.mapLocation.setOnClickListener {
@@ -63,7 +57,7 @@ class SettingsFragment : Fragment() {
             settingsViewModel.setLanguage("ar")
         }
 
-        binding.arabicLanguage.setOnClickListener {
+        binding.englishLanguage.setOnClickListener {
             settingsViewModel.setLanguage("en")
         }
 

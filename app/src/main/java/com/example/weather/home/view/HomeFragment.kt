@@ -172,54 +172,60 @@ class HomeFragment : Fragment() {
                             loading()
                         }
                         is RoomStatus.Success -> {
-                            success()
-                            binding.hour.text = getHourFromTimestamp(it.weather.current!!.dt)
-                            binding.dateText.text = getDateFromTimestamp(it.weather.current!!.dt)
-                            binding.locationText.text = getLocationFromLatAndLon(it.weather.lat,
-                                it.weather.lon)
-
-                            binding.description.text = it.weather.current!!.weather[0].description
-                            binding.status.text = it.weather.current!!.weather[0].main
-                            binding.temperature.text = it.weather.current!!.temp.toString()
-                            Glide.with(requireContext())
-                                .load(
-                                    "https://openweathermap.org/img/wn/"+
-                                            it.weather.current!!.weather[0].icon+"@2x.png"
+                                success()
+                                binding.hour.text = getHourFromTimestamp(it.weather.current!!.dt)
+                                binding.dateText.text =
+                                    getDateFromTimestamp(it.weather.current!!.dt)
+                                binding.locationText.text = getLocationFromLatAndLon(
+                                    it.weather.lat,
+                                    it.weather.lon
                                 )
-                                .apply(
-                                    RequestOptions().override(
-                                        binding.image.width,
-                                        binding.image.height
+
+                                binding.description.text =
+                                    it.weather.current!!.weather[0].description
+                                binding.status.text = it.weather.current!!.weather[0].main
+                                binding.temperature.text = it.weather.current!!.temp.toString()
+                                Glide.with(requireContext())
+                                    .load(
+                                        "https://openweathermap.org/img/wn/" +
+                                                it.weather.current!!.weather[0].icon + "@2x.png"
                                     )
-                                ).into(binding.image)
+                                    .apply(
+                                        RequestOptions().override(
+                                            binding.image.width,
+                                            binding.image.height
+                                        )
+                                    ).into(binding.image)
 
-                            binding.textValuePressure.text = it.weather.current!!.pressure.toString()
-                            binding.textValueHumidity.text = it.weather.current!!.humidity.toString()
-                            binding.textValueCloud.text = it.weather.current!!.clouds.toString()
-                            binding.textValueSunRise.text =
-                                getHourFromTimestamp(it.weather.current!!.sunrise)
-                            binding.textValueVisibility.text =
-                                it.weather.current!!.visibility.toString()
-                            binding.textValueWindSpeed.text =
-                                it.weather.current!!.wind_speed.toString()
+                                binding.textValuePressure.text =
+                                    it.weather.current!!.pressure.toString()
+                                binding.textValueHumidity.text =
+                                    it.weather.current!!.humidity.toString()
+                                binding.textValueCloud.text = it.weather.current!!.clouds.toString()
+                                binding.textValueSunRise.text =
+                                    getHourFromTimestamp(it.weather.current!!.sunrise)
+                                binding.textValueVisibility.text =
+                                    it.weather.current!!.visibility.toString()
+                                binding.textValueWindSpeed.text =
+                                    it.weather.current!!.wind_speed.toString()
 
-                            hourAdapter = HourAdapter(requireContext())
-                            binding.recyclerToday.apply {
-                                adapter = hourAdapter
-                                hourAdapter.submitList(it.weather.hourly)
-                                layoutManager = LinearLayoutManager(context).apply {
-                                    orientation = RecyclerView.HORIZONTAL
+                                hourAdapter = HourAdapter(requireContext())
+                                binding.recyclerToday.apply {
+                                    adapter = hourAdapter
+                                    hourAdapter.submitList(it.weather.hourly)
+                                    layoutManager = LinearLayoutManager(context).apply {
+                                        orientation = RecyclerView.HORIZONTAL
+                                    }
                                 }
-                            }
 
-                            dayAdapter = DayAdapter(requireContext())
-                            binding.recyclerWeekly.apply {
-                                adapter = dayAdapter
-                                dayAdapter.submitList(it.weather.daily)
-                                layoutManager = LinearLayoutManager(context).apply {
-                                    orientation = RecyclerView.VERTICAL
+                                dayAdapter = DayAdapter(requireContext())
+                                binding.recyclerWeekly.apply {
+                                    adapter = dayAdapter
+                                    dayAdapter.submitList(it.weather.daily)
+                                    layoutManager = LinearLayoutManager(context).apply {
+                                        orientation = RecyclerView.VERTICAL
+                                    }
                                 }
-                            }
                         }
                         else -> {
                             Snackbar.make(binding.root,"Please, Check your connection",Snackbar.LENGTH_SHORT)
@@ -272,6 +278,7 @@ class HomeFragment : Fragment() {
 
     private fun getLocationFromLatAndLon(lat: Double, lon: Double): String {
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
+
         val address = geocoder.getFromLocation(lat, lon, 1) as List<Address>
         return if (address.isNotEmpty()) {
             if (address[0].locality == null){

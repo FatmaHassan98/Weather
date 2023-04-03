@@ -63,9 +63,14 @@ class HomeViewModel (private val repositoryInterface: RepositoryInterface,
     fun getHomeWeather(){
         viewModelScope.launch(Dispatchers.IO)  {
             repositoryInterface.getHomeWeather.catch {
-                e-> room.value = RoomStatus.Failure(e)
+                    e-> room.value = RoomStatus.Failure(e)
             }.collect{
-                data -> room.value = RoomStatus.Success(data)
+                    data ->
+                if (checkNotNull(false)){
+                    room.value =  RoomStatus.Success(data)
+                }else {
+                    room.value =  RoomStatus.Failure(Throwable())
+                }
             }
         }
     }
