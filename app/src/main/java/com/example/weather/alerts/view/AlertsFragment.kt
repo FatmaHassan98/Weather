@@ -37,6 +37,8 @@ import com.example.weather.alerts.viewmodel.AlertViewModel
 import com.example.weather.alerts.viewmodel.AlertViewModelFactory
 import com.example.weather.database.room.AlertStatus
 import com.example.weather.database.room.ConceretLocalSource
+import com.example.weather.database.room.WeatherDao
+import com.example.weather.database.room.WeatherDatabase
 import com.example.weather.database.room.entity.EntityAlert
 import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.database.shared.prefernces.Utaliltes
@@ -82,8 +84,12 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val weatherDao : WeatherDao by lazy {
+            val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(requireContext())
+            appDataBase.getHomeWeather()
+        }
         alertViewModelFactory = AlertViewModelFactory(Repository.getInstance(APIClient.getInstance(),
-            ConceretLocalSource(requireContext())))
+            ConceretLocalSource(weatherDao)))
 
         alertViewModel = ViewModelProvider(this,alertViewModelFactory)[AlertViewModel::class.java]
 

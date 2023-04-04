@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.weather.database.room.ConceretLocalSource
+import com.example.weather.database.room.WeatherDao
+import com.example.weather.database.room.WeatherDatabase
 import com.example.weather.database.room.entity.EntityFavorite
 import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.databinding.FragmentViewFavoriteBinding
@@ -56,10 +58,15 @@ class ViewFavoriteFragment : Fragment() {
 
         val item : EntityFavorite = arguments?.getParcelable("EntityFavorite")!!
 
+        val weatherDao : WeatherDao by lazy {
+            val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(requireContext())
+            appDataBase.getHomeWeather()
+        }
+
         favoriteViewModelFactory = FavoriteViewModelFactory(
             Repository.getInstance(
                 APIClient.getInstance(),
-                ConceretLocalSource(requireContext())
+                ConceretLocalSource(weatherDao)
             )
         )
 

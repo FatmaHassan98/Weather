@@ -17,19 +17,22 @@ import kotlinx.coroutines.launch
 class FavoriteViewModel (private val repositoryInterface: RepositoryInterface)
     : ViewModel() {
 
-    val favorite = MutableStateFlow<FavoriteStatus>(FavoriteStatus.Loading)
+    var favorite = MutableStateFlow<FavoriteStatus>(FavoriteStatus.Loading)
     val weather = MutableStateFlow<APIState>(APIState.Loading)
 
     init {
         getFavorite()
     }
+
     fun deleteFavorite(entityFavorite: EntityFavorite){
         viewModelScope.launch(Dispatchers.IO) {
             repositoryInterface.deleteFavorite(entityFavorite)
         }
     }
-    private fun getFavorite(){
-        viewModelScope.launch(Dispatchers.IO)  {
+
+     fun getFavorite(){
+        viewModelScope.launch {
+            println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
             repositoryInterface.getFavorite.catch {
                     e-> favorite.value = FavoriteStatus.Failure(e)
             }.collect{

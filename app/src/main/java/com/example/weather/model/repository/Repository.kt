@@ -48,6 +48,7 @@ class Repository private constructor(var remoteSource: RemoteSource,
     override suspend fun deleteFavorite(entityFavorite: EntityFavorite) {
         localSource.deleteFavorite(entityFavorite)
     }
+
     override val getAlert: Flow<List<EntityAlert>> = localSource.getAlert
     override suspend fun insertAlert(entityAlert: EntityAlert) {
         localSource.insertAlert(entityAlert)

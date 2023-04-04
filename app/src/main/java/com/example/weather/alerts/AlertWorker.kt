@@ -20,6 +20,8 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.weather.R
 import com.example.weather.database.room.ConceretLocalSource
+import com.example.weather.database.room.WeatherDao
+import com.example.weather.database.room.WeatherDatabase
 import com.example.weather.database.room.entity.EntityAlert
 import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.database.shared.prefernces.Utaliltes
@@ -44,9 +46,12 @@ class AlertWorker (private var context: Context, private var workerParameters: W
     var content =""
 
     override suspend fun doWork(): Result {
+        val weatherDao : WeatherDao by lazy {
+            val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(context)
+            appDataBase.getHomeWeather()
+        }
 
-
-        repository = Repository.getInstance(APIClient.getInstance(),ConceretLocalSource(context))
+        repository = Repository.getInstance(APIClient.getInstance(),ConceretLocalSource(weatherDao))
 
         val start = inputData.getLong(Utaliltes.TIME,0)
         val id = inputData.getString(Utaliltes.ID)

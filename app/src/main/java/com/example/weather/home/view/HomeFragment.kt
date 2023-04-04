@@ -21,6 +21,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.weather.R
 import com.example.weather.database.room.ConceretLocalSource
 import com.example.weather.database.room.RoomStatus
+import com.example.weather.database.room.WeatherDao
+import com.example.weather.database.room.WeatherDatabase
 import com.example.weather.database.room.entity.EntityHome
 import com.example.weather.home.model.GPSLocation
 import com.example.weather.database.shared.prefernces.SharedPreferenceSource
@@ -59,9 +61,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+         val weatherDao : WeatherDao by lazy {
+            val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(requireContext())
+            appDataBase.getHomeWeather()
+        }
+
         homeViewModelFactory = HomeViewModelFactory(
             Repository.getInstance(APIClient.getInstance(),
-                ConceretLocalSource(requireContext())),
+                ConceretLocalSource(weatherDao)),
             GPSLocation.getInstance(requireContext()),
             SharedPreferenceSource.getInstance(requireContext())
         )

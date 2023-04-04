@@ -15,7 +15,7 @@ class MapViewModelFactory (private val repositoryInterface: RepositoryInterface,
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(MapViewModel::class.java)){
-            MapViewModel(repositoryInterface,gpsLocation,sharedPreferenceSource) as T
+            MapViewModel(repositoryInterface) as T
         }else{
             throw java.lang.IllegalArgumentException("ViewModel class not found")
         }

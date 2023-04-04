@@ -18,6 +18,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.weather.R
 import com.example.weather.database.room.ConceretLocalSource
+import com.example.weather.database.room.WeatherDao
+import com.example.weather.database.room.WeatherDatabase
 import com.example.weather.database.room.entity.EntityFavorite
 import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.databinding.ActivityMapsBinding
@@ -74,10 +76,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         mapFragment.getMapAsync(this)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        val weatherDao : WeatherDao by lazy {
+            val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(this@MapsActivity)
+            appDataBase.getHomeWeather()
+        }
+
         mapViewModelFactory = MapViewModelFactory(
             Repository.getInstance(
                 APIClient.getInstance(),
-                ConceretLocalSource(this)
+                ConceretLocalSource(weatherDao)
             ),
             GPSLocation.getInstance(this),
             SharedPreferenceSource.getInstance(this)
