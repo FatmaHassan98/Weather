@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.weather.R
 import com.example.weather.database.room.ConceretLocalSource
 import com.example.weather.database.room.RoomStatus
 import com.example.weather.database.room.WeatherDao
@@ -27,13 +26,11 @@ import com.example.weather.database.room.entity.EntityHome
 import com.example.weather.home.model.GPSLocation
 import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.databinding.FragmentHomeBinding
-import com.example.weather.home.model.LocationStatus
 import com.example.weather.home.viewmodel.HomeViewModel
 import com.example.weather.home.viewmodel.HomeViewModelFactory
 import com.example.weather.model.repository.Repository
 import com.example.weather.network.APIClient
 import com.example.weather.network.APIState
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -61,7 +58,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-         val weatherDao : WeatherDao by lazy {
+
+        val weatherDao : WeatherDao by lazy {
             val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(requireContext())
             appDataBase.getHomeWeather()
         }
@@ -72,7 +70,6 @@ class HomeFragment : Fragment() {
             GPSLocation.getInstance(requireContext()),
             SharedPreferenceSource.getInstance(requireContext())
         )
-
         homeViewModel = ViewModelProvider(this,homeViewModelFactory)[HomeViewModel::class.java]
 
         if(checkForInternet(requireContext())) {
@@ -272,29 +269,44 @@ class HomeFragment : Fragment() {
     @SuppressLint("SimpleDateFormat")
     private fun getHourFromTimestamp(timestamp: Long): String {
         val time = Date(timestamp * 1000)
-        val simpleDateFormat = SimpleDateFormat("h:mm aaa")
+        var locale = if (SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+        val simpleDateFormat = SimpleDateFormat("h:mm aaa",locale)
         return simpleDateFormat.format(time)
     }
 
     @SuppressLint("SimpleDateFormat")
     private fun getDateFromTimestamp(timestamp: Long):String{
         val time = Date(timestamp * 1000)
-        val simpleDateFormat = SimpleDateFormat("EEEE, dd LLL")
+        var locale = if (SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+        val simpleDateFormat = SimpleDateFormat("EEEE, dd LLL", locale)
         return simpleDateFormat.format(time)
     }
 
     private fun getLocationFromLatAndLon(lat: Double, lon: Double): String {
-        val geocoder = Geocoder(requireContext(), Locale.getDefault())
-
+        var locale = if (SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+        val geocoder = Geocoder(requireContext(), locale)
         val address = geocoder.getFromLocation(lat, lon, 1) as List<Address>
         return if (address.isNotEmpty()) {
             if (address[0].locality == null){
-                "null"
+                address[0].subAdminArea
             }else{
                 address[0].locality
             }
-        }else
+        }else {
             "null"
+        }
     }
 
     private fun checkForInternet(context: Context): Boolean {

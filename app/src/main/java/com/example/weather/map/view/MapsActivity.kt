@@ -24,9 +24,6 @@ import com.example.weather.database.room.entity.EntityFavorite
 import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.databinding.ActivityMapsBinding
 import com.example.weather.home.model.GPSLocation
-import com.example.weather.home.model.LocationStatus
-import com.example.weather.home.viewmodel.HomeViewModel
-import com.example.weather.home.viewmodel.HomeViewModelFactory
 import com.example.weather.map.viewmodel.MapViewModel
 import com.example.weather.map.viewmodel.MapViewModelFactory
 import com.example.weather.model.repository.Repository
@@ -77,7 +74,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         val weatherDao : WeatherDao by lazy {
-            val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(this@MapsActivity)
+
+            val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(this)
             appDataBase.getHomeWeather()
         }
 
@@ -145,6 +143,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
                 } else if (SharedPreferenceSource.getInstance(this).getSavedMap() == "alert") {
                     SharedPreferenceSource.getInstance(this).setLatAndLonAlert(lat, lon)
                 }else{
+                    println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
                     SharedPreferenceSource.getInstance(this).setLatAndLonHome(lat, lon)
                 }
             }else{

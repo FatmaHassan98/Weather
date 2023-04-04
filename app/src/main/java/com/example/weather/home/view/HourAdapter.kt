@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.databinding.ItemTodayBinding
 import com.example.weather.model.pojos.Hourly
 import java.text.SimpleDateFormat
@@ -39,7 +40,12 @@ class HourAdapter(private val context: Context) : ListAdapter<Hourly, HourAdapte
     @SuppressLint("SimpleDateFormat")
     private fun getHourFromTimestamp(timestamp: Long): String {
         val timeD = Date(timestamp * 1000)
-        val sdf = SimpleDateFormat("h:mm aaa")
+        var locale = if (SharedPreferenceSource.getInstance(context).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+        val sdf = SimpleDateFormat("h:mm aaa",locale)
         return sdf.format(timeD)
     }
 }

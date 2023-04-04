@@ -60,18 +60,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="35dp"
                     app:srcCompat="@drawable/baseline_location_on_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="25dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginStart="27dp"
                     android:padding="10dp"
                     android:text="@string/location"
                     android:textColor="@color/white"
@@ -81,6 +89,8 @@
                 <RadioGroup
                     android:id="@+id/locationGroup"
                     android:layout_width="match_parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="150dp">
 
@@ -101,6 +111,8 @@
                         android:textSize="15sp" />
                 </RadioGroup>
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -117,17 +129,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardLocation">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="35dp"
                     android:layout_marginStart="10dp"
                     app:srcCompat="@drawable/baseline_language_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="22dp"
                     android:layout_marginStart="25dp"
                     android:padding="10dp"
                     android:text="@string/language"
@@ -139,6 +158,8 @@
                     android:id="@+id/languageGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginStart="150dp">
 
                     <RadioButton
@@ -158,6 +179,8 @@
                         android:textSize="15sp" />
                 </RadioGroup>
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -174,18 +197,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardLanguage">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="55dp"                    android:layout_marginStart="10dp"
                     app:srcCompat="@drawable/baseline_thermostat_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="25dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="44dp"                    android:layout_marginStart="25dp"
                     android:padding="10dp"
                     android:text="@string/temperature"
                     android:textColor="@color/white"
@@ -195,6 +223,8 @@
                 <RadioGroup
                     android:id="@+id/temperatureGroup"
                     android:layout_width="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="150dp">
 
@@ -223,6 +253,8 @@
                         android:textSize="15sp" />
                 </RadioGroup>
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -239,17 +271,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardTemperature">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="35dp"
                     android:layout_marginStart="10dp"
                     app:srcCompat="@drawable/baseline_shutter_speed_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="22dp"
                     android:layout_marginStart="25dp"
                     android:padding="10dp"
                     android:text="@string/wind_speed"
@@ -261,6 +300,8 @@
                     android:id="@+id/windGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginStart="150dp">
 
                     <RadioButton
@@ -280,6 +321,7 @@
                         android:textSize="15sp" />
                 </RadioGroup>
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -296,18 +338,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardSpeed">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="35dp"
                     android:layout_marginStart="10dp"
                     app:srcCompat="@drawable/baseline_notifications_active_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="25dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="22dp"                    android:layout_marginStart="25dp"
                     android:padding="10dp"
                     android:text="@string/notifications"
                     android:textColor="@color/white"
@@ -318,6 +366,8 @@
                     android:id="@+id/notificationGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginStart="150dp">
 
                     <RadioButton
@@ -337,6 +387,7 @@
                         android:textSize="15sp" />
                 </RadioGroup>
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -353,18 +404,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardNotification">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="35dp"
                     android:layout_marginStart="10dp"
                     app:srcCompat="@drawable/baseline_light_mode_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="25dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="22dp"                    android:layout_marginStart="25dp"
                     android:padding="10dp"
                     android:text="@string/theme"
                     android:textColor="@color/white"
@@ -375,6 +432,8 @@
                     android:id="@+id/themeGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginStart="150dp">
 
                     <RadioButton
@@ -393,6 +452,8 @@
                         android:textColor="@color/white"
                         android:textSize="15sp" />
                 </RadioGroup>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 

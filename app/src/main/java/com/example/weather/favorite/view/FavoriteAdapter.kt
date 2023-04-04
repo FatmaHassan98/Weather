@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.weather.database.room.entity.EntityFavorite
+import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.databinding.ItemFavoriteBinding
 import java.util.*
 
@@ -68,16 +69,25 @@ class FavoriteAdapter(
     }
 
     private fun getLocationFromLatAndLon(lat: Double, lon: Double): String {
-        val geocoder = Geocoder(context, Locale.getDefault())
+        var locale = if (SharedPreferenceSource.getInstance(context).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+
+        val geocoder = Geocoder(context,locale)
         val address = geocoder.getFromLocation(lat, lon, 1) as List<Address>
         return if (address.isNotEmpty()) {
+            println(address)
             if (address[0].locality == null){
-                "null"
+                address[0].featureName
             }else{
                 address[0].locality
             }
-        }else
-            "null"    }
+        }else {
+            "null"
+        }
+    }
 }
 
 class DiffUtilsFavorite() : DiffUtil.ItemCallback<EntityFavorite>(){

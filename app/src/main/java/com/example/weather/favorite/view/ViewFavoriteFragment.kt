@@ -26,6 +26,7 @@ import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.databinding.FragmentViewFavoriteBinding
 import com.example.weather.favorite.viewmodel.FavoriteViewModel
 import com.example.weather.favorite.viewmodel.FavoriteViewModelFactory
+import com.example.weather.home.model.GPSLocation
 import com.example.weather.home.view.DayAdapter
 import com.example.weather.home.view.HourAdapter
 import com.example.weather.model.repository.Repository
@@ -243,27 +244,43 @@ class ViewFavoriteFragment : Fragment() {
     @SuppressLint("SimpleDateFormat")
     private fun getHourFromTimestamp(timestamp: Long): String {
         val time = Date(timestamp * 1000)
-        val simpleDateFormat = SimpleDateFormat("h:mm aaa")
+        var locale = if (SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+        val simpleDateFormat = SimpleDateFormat("h:mm aaa",locale)
         return simpleDateFormat.format(time)
     }
     @SuppressLint("SimpleDateFormat")
     private fun getDateFromTimestamp(timestamp: Long):String{
         val time = Date(timestamp * 1000)
-        val simpleDateFormat = SimpleDateFormat("EEEE, dd LLL")
+        var locale = if (SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+        val simpleDateFormat = SimpleDateFormat("EEEE, dd LLL",locale)
         return simpleDateFormat.format(time)
     }
 
     private fun getLocationFromLatAndLon(lat: Double, lon: Double): String {
-        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+        var locale = if (SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+        val geocoder = Geocoder(requireContext(), locale)
         val address = geocoder.getFromLocation(lat, lon, 1) as List<Address>
         return if (address.isNotEmpty()) {
             if (address[0].locality == null){
-                "null"
+                address[0].subAdminArea
             }else{
                 address[0].locality
             }
-        }else
+        }else {
             "null"
+        }
     }
 
     private fun checkForInternet(context: Context): Boolean {

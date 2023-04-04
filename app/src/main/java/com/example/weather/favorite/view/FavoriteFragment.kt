@@ -16,7 +16,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weather.R
 import com.example.weather.database.room.ConceretLocalSource
 import com.example.weather.database.room.FavoriteStatus
 import com.example.weather.database.room.WeatherDao
@@ -26,10 +25,10 @@ import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.databinding.FragmentFavoriteBinding
 import com.example.weather.favorite.viewmodel.FavoriteViewModel
 import com.example.weather.favorite.viewmodel.FavoriteViewModelFactory
+import com.example.weather.home.model.GPSLocation
 import com.example.weather.map.view.MapsActivity
 import com.example.weather.model.repository.Repository
 import com.example.weather.network.APIClient
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -53,7 +52,10 @@ class FavoriteFragment : Fragment() , FavoriteClickLisener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        val weatherDao : WeatherDao by lazy {
+            val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(requireContext())
+            appDataBase.getHomeWeather()
+        }
 
         binding.btnAdd.setOnClickListener {
             if (checkForInternet(requireContext())) {
@@ -74,7 +76,6 @@ class FavoriteFragment : Fragment() , FavoriteClickLisener {
             APIClient.getInstance(),
             ConceretLocalSource(weatherDao))
         )
-
         favoriteViewModel = ViewModelProvider(this,favoriteViewModelFactory)[FavoriteViewModel::class.java]
 
 

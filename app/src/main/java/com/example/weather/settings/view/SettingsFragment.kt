@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.weather.R
 import com.example.weather.database.shared.prefernces.SharedPreferenceSource
@@ -55,10 +57,12 @@ class SettingsFragment : Fragment() {
 
         binding.arabicLanguage.setOnClickListener {
             settingsViewModel.setLanguage("ar")
+            changeLanguageLocaleTo(SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage())
         }
 
         binding.englishLanguage.setOnClickListener {
             settingsViewModel.setLanguage("en")
+            changeLanguageLocaleTo(SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage())
         }
 
         binding.celsiusTemperature.setOnClickListener {
@@ -134,7 +138,11 @@ class SettingsFragment : Fragment() {
         }else{
             binding.darkTheme.isChecked = true
         }
+    }
 
+    private fun changeLanguageLocaleTo(lan: String) {
+        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(lan)
+        AppCompatDelegate.setApplicationLocales(appLocale)
     }
 
 

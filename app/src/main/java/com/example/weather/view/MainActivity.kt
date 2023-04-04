@@ -16,7 +16,9 @@ import android.widget.Switch
 import android.widget.TextView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
@@ -33,6 +35,8 @@ import com.example.weather.databinding.ActivityMainBinding
 import com.example.weather.home.model.LocationStatus
 import com.example.weather.map.view.MapsActivity
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -51,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         if (SharedPreferenceSource.getInstance(this).getSavedLocationWay() == ""){
             val dialog = Dialog(this)
@@ -163,4 +168,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
 }

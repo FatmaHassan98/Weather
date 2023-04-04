@@ -7,9 +7,7 @@ import com.example.weather.favorite.viewmodel.FavoriteViewModel
 import com.example.weather.home.model.GPSLocation
 import com.example.weather.model.repository.RepositoryInterface
 
-class MapViewModelFactory (private val repositoryInterface: RepositoryInterface,
-                           private val gpsLocation: GPSLocation,
-                           private val sharedPreferenceSource: SharedPreferenceSource
+class MapViewModelFactory (private val repositoryInterface: RepositoryInterface
 )
     : ViewModelProvider.Factory {
 
