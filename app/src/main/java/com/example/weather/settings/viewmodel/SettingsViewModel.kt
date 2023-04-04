@@ -7,13 +7,6 @@ import com.example.weather.database.shared.prefernces.Utaliltes
 class SettingsViewModel(private val sharedPreferenceSource: SharedPreferenceSource)
     : ViewModel(){
 
-    fun setSetting(location: String, language: String, temperature: String,
-                   windSpeed: String, notification: String, theme: String) {
-
-        sharedPreferenceSource.setSetting(location, language, temperature,
-            windSpeed, notification, theme)
-    }
-
     fun setLocationWay(location: String){
         sharedPreferenceSource.setLocationWay(location)
     }

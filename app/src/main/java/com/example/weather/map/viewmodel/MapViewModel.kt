@@ -14,9 +14,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class MapViewModel (private val repositoryInterface: RepositoryInterface,
-                    private val gpsLocation: GPSLocation,
-                    private val sharedPreferenceSource: SharedPreferenceSource)
+class MapViewModel (private val repositoryInterface: RepositoryInterface)
     : ViewModel() {
 
     val weather = MutableStateFlow<APIState>(APIState.Loading)

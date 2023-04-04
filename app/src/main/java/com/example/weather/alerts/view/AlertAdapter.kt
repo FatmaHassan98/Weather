@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.weather.R
 import com.example.weather.database.room.entity.EntityAlert
 import com.example.weather.database.room.entity.EntityFavorite
+import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.databinding.ItemAlertBinding
 import com.example.weather.databinding.ItemFavoriteBinding
 import com.example.weather.favorite.view.FavoriteClickLisener
@@ -54,16 +55,23 @@ class AlertAdapter(private val context: Context ,
     }
 
     private fun getLocationFromLatAndLon(lat: Double, lon: Double): String {
-        val geocoder = Geocoder(context, Locale.getDefault())
+        var locale = if (SharedPreferenceSource.getInstance(context).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+        val geocoder = Geocoder(context, locale)
         val address = geocoder.getFromLocation(lat, lon, 1) as List<Address>
         return if (address.isNotEmpty()) {
             if (address[0].locality == null){
-                "null"
+                address[0].featureName
             }else{
                 address[0].locality
             }
-        }else
-            "null"    }
+        }else {
+            "null"
+        }
+    }
 }
 
 class DiffUtilsAlert() : DiffUtil.ItemCallback<EntityAlert>(){

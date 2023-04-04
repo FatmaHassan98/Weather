@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.weather.R
+import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.databinding.ItemDayBinding
 import com.example.weather.model.pojos.Daily
 import java.text.SimpleDateFormat
@@ -45,7 +46,12 @@ class DayAdapter (private val context: Context) : ListAdapter<Daily, DayAdapter.
     @SuppressLint("SimpleDateFormat")
     private fun getDayFromTimestamp(timestamp: Long): String {
         val timeD = Date(timestamp * 1000)
-        val sdf = SimpleDateFormat("E")
+        var locale = if (SharedPreferenceSource.getInstance(context).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+        val sdf = SimpleDateFormat("E",locale)
         return sdf.format(timeD)
     }
 
