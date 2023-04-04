@@ -37,10 +37,13 @@ import com.example.weather.alerts.viewmodel.AlertViewModel
 import com.example.weather.alerts.viewmodel.AlertViewModelFactory
 import com.example.weather.database.room.AlertStatus
 import com.example.weather.database.room.ConceretLocalSource
+import com.example.weather.database.room.WeatherDao
+import com.example.weather.database.room.WeatherDatabase
 import com.example.weather.database.room.entity.EntityAlert
 import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.database.shared.prefernces.Utaliltes
 import com.example.weather.databinding.FragmentAlertsBinding
+import com.example.weather.home.model.GPSLocation
 import com.example.weather.map.view.MapsActivity
 import com.example.weather.model.repository.Repository
 import com.example.weather.network.APIClient
@@ -82,8 +85,15 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        alertViewModelFactory = AlertViewModelFactory(Repository.getInstance(APIClient.getInstance(),
-            ConceretLocalSource(requireContext())))
+        val weatherDao : WeatherDao by lazy {
+            val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(requireContext())
+            appDataBase.getHomeWeather()
+        }
+
+        alertViewModelFactory = AlertViewModelFactory(Repository.getInstance(
+            APIClient.getInstance(),
+            ConceretLocalSource(weatherDao)
+        ))
 
         alertViewModel = ViewModelProvider(this,alertViewModelFactory)[AlertViewModel::class.java]
 
@@ -273,12 +283,17 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
                     entityAlert.notification = "alarm"
                 }
 
-                val ft = SimpleDateFormat("dd-MM-yyyy")
+                var locale = if (SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage() == "ar"){
+                    Locale("ar")
+                }else{
+                    Locale("en")
+                }
 
+                val ft = SimpleDateFormat("dd-MM-yyyy",locale)
                 val str = ft.format(Date())
 
                 val calendar = Calendar.getInstance()
-                val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+                val dateFormat = SimpleDateFormat("hh:mm a", locale)
                 val time =  dateFormat.format(calendar.time)
 
                 if(startDateCompare >= str && endDateCompare >= startDateCompare){
@@ -348,7 +363,12 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
     private fun formatDate(year: Int, month: Int, day: Int): String {
         val calendar = Calendar.getInstance()
         calendar.set(year, month, day)
-        val dateFormat = SimpleDateFormat("MMM dd, yyyy - EEE", Locale.getDefault())
+        var locale = if (SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+        val dateFormat = SimpleDateFormat("MMM dd, yyyy - EEE", locale)
         return dateFormat.format(calendar.time)
     }
 
@@ -356,7 +376,12 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
         calendar.set(Calendar.MINUTE, minute)
-        val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        var locale = if (SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+        val dateFormat = SimpleDateFormat("hh:mm a", locale)
         return dateFormat.format(calendar.time)
     }
 
@@ -365,12 +390,14 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
         val address = geocoder.getFromLocation(lat, lon, 1) as List<Address>
         return if (address.isNotEmpty()) {
             if (address[0].locality == null){
-                "null"
+                address[0].featureName
             }else{
                 address[0].locality
             }
-        }else
-            "null"    }
+        }else {
+            "null"
+        }
+    }
 
     override fun deleteAlert(entityAlert: EntityAlert) {
         val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(context)

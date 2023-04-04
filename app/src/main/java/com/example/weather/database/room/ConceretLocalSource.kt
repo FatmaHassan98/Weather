@@ -6,12 +6,7 @@ import com.example.weather.database.room.entity.EntityFavorite
 import com.example.weather.database.room.entity.EntityHome
 import kotlinx.coroutines.flow.Flow
 
-class ConceretLocalSource(context: Context) : LocalSource {
-
-    private val weatherDao :WeatherDao by lazy {
-        val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(context)
-        appDataBase.getHomeWeather()
-    }
+class ConceretLocalSource(private val weatherDao :WeatherDao) : LocalSource {
 
     override suspend fun insertHomeWeather(entityHome: EntityHome) {
         weatherDao.insertHomeWeather(entityHome)

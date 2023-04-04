@@ -16,19 +16,22 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.weather.R
 import com.example.weather.database.room.ConceretLocalSource
+import com.example.weather.database.room.WeatherDao
+import com.example.weather.database.room.WeatherDatabase
 import com.example.weather.database.room.entity.EntityAlert
 import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.database.shared.prefernces.Utaliltes
+import com.example.weather.home.model.GPSLocation
 import com.example.weather.model.repository.Repository
 import com.example.weather.network.APIClient
 import com.example.weather.view.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.withContext
 import java.util.*
 
@@ -45,8 +48,15 @@ class AlertWorker (private var context: Context, private var workerParameters: W
 
     override suspend fun doWork(): Result {
 
+        val weatherDao : WeatherDao by lazy {
+            val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(context)
+            appDataBase.getHomeWeather()
+        }
 
-        repository = Repository.getInstance(APIClient.getInstance(),ConceretLocalSource(context))
+        repository = Repository.getInstance(
+            APIClient.getInstance(),
+            ConceretLocalSource(weatherDao))
+
 
         val start = inputData.getLong(Utaliltes.TIME,0)
         val id = inputData.getString(Utaliltes.ID)
@@ -64,8 +74,8 @@ class AlertWorker (private var context: Context, private var workerParameters: W
 
             if(checkForInternet(context)){
                val response = repository.getWeatherAlert(
-                   42.55,
-                   -99.84,
+                   entityAlert.lat,
+                   entityAlert.lon,
                     SharedPreferenceSource.getInstance(context).getSavedUnit(),
                     SharedPreferenceSource.getInstance(context).getSavedLanguage())
 

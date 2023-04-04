@@ -4,6 +4,8 @@ import com.example.weather.database.room.LocalSource
 import com.example.weather.database.room.entity.EntityAlert
 import com.example.weather.database.room.entity.EntityFavorite
 import com.example.weather.database.room.entity.EntityHome
+import com.example.weather.database.shared.prefernces.SharedPreferenceSource
+import com.example.weather.home.model.GPSLocation
 import com.example.weather.model.pojos.WeatherResponse
 import com.example.weather.network.RemoteSource
 import kotlinx.coroutines.flow.Flow
@@ -17,10 +19,13 @@ class Repository private constructor(var remoteSource: RemoteSource,
 
         private var instance : Repository? = null
 
-        fun getInstance( remoteSource: RemoteSource,localSource: LocalSource): Repository {
-            return instance?: synchronized(this){
+        fun getInstance(
+            remoteSource: RemoteSource,
+            localSource: LocalSource,
+        ): Repository {
+            return this.instance ?: synchronized(this){
                 val _instance = Repository(remoteSource,localSource)
-                instance = _instance
+                this.instance = _instance
 
                 _instance
             }

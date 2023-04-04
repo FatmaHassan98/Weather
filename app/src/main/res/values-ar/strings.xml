@@ -1,4 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<resources>
+    <string name="app_name">الطقس</string>
+    <string name="title_home">الرئيسية</string>
+    <string name="title_favorite">المفضلة</string>
+    <string name="title_alerts">التنبيهات</string>
+    <string name="title_settings">الاعدادات</string>
+    <string name="daily">يومى</string>
+    <string name="weather">الطقس</string>
+    <string name="location">الموقع</string>
+    <string name="language">اللغة</string>
+    <string name="temperature">درجة الحرارة</string>
+    <string name="wind_speed">سرعة الرياح</string>
+    <string name="notifications">الاشعارات</string>
+    <string name="gps">الموقع الجغرافى</string>
+    <string name="map">الخريطة</string>
+    <string name="arabic">العربية</string>
+    <string name="english">الانجليزية</string>
+    <string name="celsius">سلزيوس</string>
+    <string name="kelvin">كيلفن</string>
+    <string name="fahrenheit">فهرنهايت</string>
+    <string name="meter_sec">متر / ثانية</string>
+    <string name="mile_hour">ميل / ساعة</string>
+    <string name="enable">تفعيل</string>
+    <string name="disable">تعطيل</string>
+    <string name="save">حفظ</string>
+    <string name="noAlerts">لا يوجد تنبيهات</string>
+    <string name="today">اليوم</string>
+    <string name="pressure">الضغط</string>
+    <string name="humidity">الرطوبة</string>
+    <string name="cloud">الغيمه</string>
+    <string name="sunRise">شروق الشمس</string>
+    <string name="visibility">رؤية</string>
+    <string name="theme">السمه</string>
+    <string name="light">المظهر المضيئ</string>
+    <string name="dark">المظهر الداكن</string>
+    <string name="day">يوم</string>
+    <string name="start_at">البداية:</string>
+    <string name="end_at">النهاية:</string>
+    <string name="dismiss">إلغاء</string>
+    <string name="from">من</string>
+    <string name="to">إلى</string>
+    <string name="alarm">تنبيه</string>
+    <string name="enter_start_time">ادخل وقت البداية</string>
+    <string name="enter_end_time">ادخل وقت النهاية</string>
+    <string name="notification">اشعارات</string>
+    <string name="cansel">إلغاء</string>
+    <string name="enter_location">ادخل الموقع</string>
+    <string name="weather_alarm">تنبيه الطقس</string>
+    <string name="initial_setup">الإعداد الأولي</string>
 
-<resources></resources>
+</resources>

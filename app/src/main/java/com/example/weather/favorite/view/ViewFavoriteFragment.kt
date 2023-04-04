@@ -19,11 +19,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.weather.database.room.ConceretLocalSource
+import com.example.weather.database.room.WeatherDao
+import com.example.weather.database.room.WeatherDatabase
 import com.example.weather.database.room.entity.EntityFavorite
 import com.example.weather.database.shared.prefernces.SharedPreferenceSource
 import com.example.weather.databinding.FragmentViewFavoriteBinding
 import com.example.weather.favorite.viewmodel.FavoriteViewModel
 import com.example.weather.favorite.viewmodel.FavoriteViewModelFactory
+import com.example.weather.home.model.GPSLocation
 import com.example.weather.home.view.DayAdapter
 import com.example.weather.home.view.HourAdapter
 import com.example.weather.model.repository.Repository
@@ -55,11 +58,14 @@ class ViewFavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val item : EntityFavorite = arguments?.getParcelable("EntityFavorite")!!
-
+        val weatherDao : WeatherDao by lazy {
+            val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(requireContext())
+            appDataBase.getHomeWeather()
+        }
         favoriteViewModelFactory = FavoriteViewModelFactory(
             Repository.getInstance(
                 APIClient.getInstance(),
-                ConceretLocalSource(requireContext())
+                ConceretLocalSource(weatherDao)
             )
         )
 
@@ -236,27 +242,43 @@ class ViewFavoriteFragment : Fragment() {
     @SuppressLint("SimpleDateFormat")
     private fun getHourFromTimestamp(timestamp: Long): String {
         val time = Date(timestamp * 1000)
-        val simpleDateFormat = SimpleDateFormat("h:mm aaa")
+        var locale = if (SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+        val simpleDateFormat = SimpleDateFormat("h:mm aaa",locale)
         return simpleDateFormat.format(time)
     }
     @SuppressLint("SimpleDateFormat")
     private fun getDateFromTimestamp(timestamp: Long):String{
         val time = Date(timestamp * 1000)
-        val simpleDateFormat = SimpleDateFormat("EEEE, dd LLL")
+        var locale = if (SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+        val simpleDateFormat = SimpleDateFormat("EEEE, dd LLL",locale)
         return simpleDateFormat.format(time)
     }
 
     private fun getLocationFromLatAndLon(lat: Double, lon: Double): String {
-        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+        var locale = if (SharedPreferenceSource.getInstance(requireContext()).getSavedLanguage() == "ar"){
+            Locale("ar")
+        }else{
+            Locale("en")
+        }
+        val geocoder = Geocoder(requireContext(), locale)
         val address = geocoder.getFromLocation(lat, lon, 1) as List<Address>
         return if (address.isNotEmpty()) {
             if (address[0].locality == null){
-                "null"
+                address[0].subAdminArea
             }else{
                 address[0].locality
             }
-        }else
+        }else {
             "null"
+        }
     }
 
     private fun checkForInternet(context: Context): Boolean {
