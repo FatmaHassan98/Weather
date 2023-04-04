@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface LocalSource {
 
     suspend fun insertHomeWeather(entityHome: EntityHome)
+
     val getHomeWeather : Flow<EntityHome>
 
     val getFavorite : Flow<List<EntityFavorite>>

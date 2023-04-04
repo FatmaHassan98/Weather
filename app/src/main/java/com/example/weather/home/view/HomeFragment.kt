@@ -58,6 +58,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val weatherDao : WeatherDao by lazy {
             val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(requireContext())
             appDataBase.getHomeWeather()

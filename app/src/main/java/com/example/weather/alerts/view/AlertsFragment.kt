@@ -89,11 +89,9 @@ class AlertsFragment : Fragment() , AlertOnClicklistener{
             val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(requireContext())
             appDataBase.getHomeWeather()
         }
-
-        alertViewModelFactory = AlertViewModelFactory(Repository.getInstance(
-            APIClient.getInstance(),
-            ConceretLocalSource(weatherDao)
-        ))
+        
+        alertViewModelFactory = AlertViewModelFactory(Repository.getInstance(APIClient.getInstance(),
+            ConceretLocalSource(weatherDao)))
 
         alertViewModel = ViewModelProvider(this,alertViewModelFactory)[AlertViewModel::class.java]
 
