@@ -67,22 +67,28 @@ class SettingsFragment : Fragment() {
 
         binding.celsiusTemperature.setOnClickListener {
             settingsViewModel.setUnit("metric")
+            settingsViewModel.setTemperature("metric")
+
         }
 
         binding.kelvinTemperature.setOnClickListener {
             settingsViewModel.setUnit("default")
+            settingsViewModel.setTemperature("default")
         }
 
         binding.fahrenheitTemperature.setOnClickListener {
             settingsViewModel.setUnit("imperial")
+            settingsViewModel.setTemperature("imperial")
         }
 
         binding.meterWind.setOnClickListener {
             settingsViewModel.setUnit("metric")
+            settingsViewModel.setWindSpeed("metric")
         }
 
         binding.mileWind.setOnClickListener {
             settingsViewModel.setUnit("imperial")
+            settingsViewModel.setWindSpeed("imperial")
         }
 
         binding.enableNotification.setOnClickListener {
@@ -93,13 +99,6 @@ class SettingsFragment : Fragment() {
             settingsViewModel.setNotification("disable")
         }
 
-        binding.lightTheme.setOnClickListener {
-            settingsViewModel.setTheme("light")
-        }
-
-        binding.lightTheme.setOnClickListener {
-            settingsViewModel.setTheme("dark")
-        }
 
         if (settingsViewModel.getSavedLocationWay()=="GPS"){
             binding.gpsLocation.isChecked = true
@@ -133,11 +132,6 @@ class SettingsFragment : Fragment() {
             binding.disableNotification.isChecked = true
         }
 
-        if (settingsViewModel.getSavedTheme() == "light"){
-            binding.lightTheme.isChecked = true
-        }else{
-            binding.darkTheme.isChecked = true
-        }
     }
 
     private fun changeLanguageLocaleTo(lan: String) {

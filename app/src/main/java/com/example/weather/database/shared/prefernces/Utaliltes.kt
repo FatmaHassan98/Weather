@@ -9,7 +9,6 @@ class Utaliltes {
         var WIND_SPEED = "WIND_SPEED"
         var UNIT = "UNIT"
         var NOTIFICATION = "NOTIFICATION"
-        var THEME = "THEME"
         var MAP = "MAP"
         var LAT_HOME = "LAT_HOME"
         var LON_HOME = "LON_HOME"
@@ -18,10 +17,6 @@ class Utaliltes {
         var LAT_ALERT = "LAT_ALERT"
         var LON_ALERT = "LON_ALERT"
         var TIME = "TIME"
-        var LAT = "LAT"
-        var LON = "LON"
-        var DESCRIPTION = "DESCRIPTION"
-        var TYPE = "TYPE"
         var ID = "ID"
     }
 }

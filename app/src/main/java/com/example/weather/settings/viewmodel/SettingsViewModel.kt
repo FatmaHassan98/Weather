@@ -23,9 +23,6 @@ class SettingsViewModel(private val sharedPreferenceSource: SharedPreferenceSour
         sharedPreferenceSource.setNotification(notification)
     }
 
-    fun setTheme(theme: String){
-        sharedPreferenceSource.setTheme(theme)
-    }
 
     fun getSavedLocationWay(): String {
         return sharedPreferenceSource.getSavedLocationWay()
@@ -47,8 +44,13 @@ class SettingsViewModel(private val sharedPreferenceSource: SharedPreferenceSour
         return sharedPreferenceSource.getSavedNotificationStatus()
     }
 
-    fun getSavedTheme(): String {
-        return sharedPreferenceSource.getSavedTheme()
+
+    fun setTemperature(temperature: String) {
+        sharedPreferenceSource.setTemperature(temperature)
+    }
+
+    fun setWindSpeed(windSpeed: String){
+        sharedPreferenceSource.setWindSpeed(windSpeed)
     }
 
 }

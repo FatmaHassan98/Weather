@@ -27,14 +27,13 @@ class SharedPreferenceSource private constructor(context: Context){
 
        }
    }
-    fun setSetting(location: String, language: String, temperature: String,
-                   windSpeed: String, notification: String, theme: String) {
-        editor!!.putString(Utaliltes.LOCATION, location)
-        editor!!.putString(Utaliltes.LANGUAGE, language)
+    fun setTemperature(temperature: String) {
         editor!!.putString(Utaliltes.TEMPERATURE, temperature)
+        editor!!.commit()
+    }
+
+    fun setWindSpeed(windSpeed: String){
         editor!!.putString(Utaliltes.WIND_SPEED, windSpeed)
-        editor!!.putString(Utaliltes.NOTIFICATION, notification)
-        editor!!.putString(Utaliltes.THEME, theme)
         editor!!.commit()
     }
     fun setLocationWay(location: String){
@@ -57,10 +56,6 @@ class SharedPreferenceSource private constructor(context: Context){
         editor!!.commit()
     }
 
-    fun setTheme(theme: String){
-        editor!!.putString(Utaliltes.THEME, theme)
-        editor!!.commit()
-    }
     fun setMap(map:String){
         editor!!.putString(Utaliltes.MAP,map)
         editor!!.commit()
@@ -118,9 +113,7 @@ class SharedPreferenceSource private constructor(context: Context){
     fun getSavedNotificationStatus(): String {
         return sharedPreferences!!.getString(Utaliltes.NOTIFICATION, "")!!
     }
-    fun getSavedTheme(): String {
-        return sharedPreferences!!.getString(Utaliltes.THEME, "light")!!
-    }
+
     fun getSavedMap(): String? {
         return sharedPreferences!!.getString(Utaliltes.MAP,"")
     }
