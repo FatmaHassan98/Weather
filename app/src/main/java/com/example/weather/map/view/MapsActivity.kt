@@ -83,9 +83,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
             Repository.getInstance(
                 APIClient.getInstance(),
                 ConceretLocalSource(weatherDao)
-            ),
-            GPSLocation.getInstance(this),
-            SharedPreferenceSource.getInstance(this)
+            )
         )
 
 
