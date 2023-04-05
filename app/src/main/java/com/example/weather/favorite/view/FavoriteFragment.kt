@@ -52,11 +52,6 @@ class FavoriteFragment : Fragment() , FavoriteClickLisener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val weatherDao : WeatherDao by lazy {
-            val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(requireContext())
-            appDataBase.getHomeWeather()
-        }
-
         binding.btnAdd.setOnClickListener {
             if (checkForInternet(requireContext())) {
                 SharedPreferenceSource.getInstance(requireContext()).setMap("favorite")
