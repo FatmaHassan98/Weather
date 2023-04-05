@@ -35,5 +35,4 @@ class MapViewModel (private val repositoryInterface: RepositoryInterface)
             }
         }
     }
-
 }
