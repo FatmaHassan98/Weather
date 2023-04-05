@@ -47,15 +47,12 @@ class AlertWorker (private var context: Context, private var workerParameters: W
     var content =""
 
     override suspend fun doWork(): Result {
-
         val weatherDao : WeatherDao by lazy {
             val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(context)
             appDataBase.getHomeWeather()
         }
 
-        repository = Repository.getInstance(
-            APIClient.getInstance(),
-            ConceretLocalSource(weatherDao))
+        repository = Repository.getInstance(APIClient.getInstance(),ConceretLocalSource(weatherDao))
 
 
         val start = inputData.getLong(Utaliltes.TIME,0)

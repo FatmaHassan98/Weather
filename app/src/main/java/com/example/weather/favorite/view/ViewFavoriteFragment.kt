@@ -58,10 +58,12 @@ class ViewFavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val item : EntityFavorite = arguments?.getParcelable("EntityFavorite")!!
+
         val weatherDao : WeatherDao by lazy {
             val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(requireContext())
             appDataBase.getHomeWeather()
         }
+
         favoriteViewModelFactory = FavoriteViewModelFactory(
             Repository.getInstance(
                 APIClient.getInstance(),

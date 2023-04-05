@@ -35,7 +35,7 @@ class AlertViewModel (private val repositoryInterface: RepositoryInterface)
         }
     }
 
-    private fun getAlert(){
+    fun getAlert(){
         viewModelScope.launch(Dispatchers.IO)  {
             repositoryInterface.getAlert.catch {
                     e-> alert.value = AlertStatus.Failure(e)

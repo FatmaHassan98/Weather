@@ -74,6 +74,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         val weatherDao : WeatherDao by lazy {
+
             val appDataBase: WeatherDatabase = WeatherDatabase.getInstance(this)
             appDataBase.getHomeWeather()
         }
@@ -81,8 +82,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCamera
         mapViewModelFactory = MapViewModelFactory(
             Repository.getInstance(
                 APIClient.getInstance(),
-                ConceretLocalSource(weatherDao))
-            )
+                ConceretLocalSource(weatherDao)
+            ),
+            GPSLocation.getInstance(this),
+            SharedPreferenceSource.getInstance(this)
+        )
+
 
         mapViewModel = ViewModelProvider(this,mapViewModelFactory)[MapViewModel::class.java]
 

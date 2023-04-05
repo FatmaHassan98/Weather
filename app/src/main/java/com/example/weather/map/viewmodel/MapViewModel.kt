@@ -20,11 +20,11 @@ class MapViewModel (private val repositoryInterface: RepositoryInterface)
     val weather = MutableStateFlow<APIState>(APIState.Loading)
     val room = MutableStateFlow<RoomStatus>(RoomStatus.Loading)
 
-        fun insertFavorite(entityFavorite: EntityFavorite){
-            viewModelScope.launch {
-                repositoryInterface.insertFavorite(entityFavorite)
-            }
+    fun insertFavorite(entityFavorite: EntityFavorite){
+        viewModelScope.launch {
+            repositoryInterface.insertFavorite(entityFavorite)
         }
+    }
 
     fun getWeather(lat: Double, lon: Double, units: String, lang:String) {
         viewModelScope.launch{
